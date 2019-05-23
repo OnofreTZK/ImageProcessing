@@ -93,7 +93,7 @@ void printaTeste(Imagem *img){
         for(j = 0;j<img->coluna;j++){
           printf("%d\n", img->pixel[i][j].r);
           printf("%d\n", img->pixel[i][j].g);
-          printf("%d\n", img->pixel[i][j].b);
+          printf("%d\n", img->pixel[i][j].b); 
         }
    }
 
