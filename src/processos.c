@@ -16,8 +16,6 @@ unsigned int MediaPixel(Pixel **pixel, int i, int j){
 
 
 
-
-
 void ImagemCinza(Imagem *img){
 
 	for(i = 0;i<img->linha;i++){
