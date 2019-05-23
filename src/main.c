@@ -32,8 +32,8 @@ int main(int argc, char const *argv[])
 
     if(strcmp(cmd, cin) == 0){
     	LerImagem(argv[1], &entrada);
-       ImagemCinza(&entrada);
-        CriaImagem(&entrada);
+         ImagemCinza(&entrada);
+          CriaImagem(&entrada);
     }
     else if(strcmp(cmd, thr) == 0){
      	LerImagem(argv[1], &entrada);
