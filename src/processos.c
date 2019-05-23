@@ -18,11 +18,11 @@ unsigned int MediaPixel(Pixel **pixel, int i, int j){
 
 void ImagemCinza(Imagem *img){
 
-	for(i = 0;i<img->linha;i++){
+    for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          img->pixel[i][j].r = MediaPixel(img->pixel, i, j);
-          img->pixel[i][j].g = MediaPixel(img->pixel, i, j);
-          img->pixel[i][j].b = MediaPixel(img->pixel, i, j);
+           img->pixel[i][j].r = MediaPixel(img->pixel, i, j);
+           img->pixel[i][j].g = MediaPixel(img->pixel, i, j);
+           img->pixel[i][j].b = MediaPixel(img->pixel, i, j);
         }
     }  
 }
