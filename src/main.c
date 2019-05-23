@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
     printf("$'red'\t->\tReduzir a imagem\n");
     printf("$'exi' para sair\n");
 
-    gets(cmd);
+    gets(cmd);//can't be in final version
 
     
 
