@@ -5,6 +5,9 @@
 #include <string.h>
 
 //Alteração da imagem para escala em cinza
-unsigned int ImagemCinza(Imagem *img);
+void ImagemCinza(Imagem *img);
+
+//Função para retornar a media do pixel e processa-lo em uma escala cinza.
+unsigned int MediaPixel(Pixel **pixel, int i, int j);
 
 #endif
