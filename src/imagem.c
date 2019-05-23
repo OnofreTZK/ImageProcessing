@@ -7,10 +7,10 @@ int i, j; //Declarei globalmente pois sera bastante usado na leitura e escrita d
 
 void AlocaMatriz(Imagem *img){
 
-  img->Pixel = (Pixel**) malloc(img->linha*sizeof(Pixel*));
+  img->pixel = (Pixel**) malloc(img->linha*sizeof(Pixel*));
   
   for(int i = 0;i<img->linha;i++){
-    img->Pixel[i] = (Pixel*) malloc(img->coluna*sizeof(Pixel));
+    img->pixel[i] = (Pixel*) malloc(img->coluna*sizeof(Pixel));
   }
 }
 
@@ -35,9 +35,9 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
 
       for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          fscanf(imagem_entrada, " %d", &img->Pixel[i][j].r);
-          fscanf(imagem_entrada, " %d", &img->Pixel[i][j].g);
-          fscanf(imagem_entrada, " %d", &img->Pixel[i][j].b);
+          fscanf(imagem_entrada, " %d", &img->pixel[i][j].r);
+          fscanf(imagem_entrada, " %d", &img->pixel[i][j].g);
+          fscanf(imagem_entrada, " %d", &img->pixel[i][j].b);
         }
       }
     }
@@ -66,9 +66,9 @@ void CriaImagem(Imagem *img){
 
        for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          fprintf(imagem_saida, "%d\n", img->Pixel[i][j].r);
-          fprintf(imagem_saida, "%d\n", img->Pixel[i][j].g);
-          fprintf(imagem_saida, "%d\n", img->Pixel[i][j].b);
+          fprintf(imagem_saida, "%d\n", img->pixel[i][j].r);
+          fprintf(imagem_saida, "%d\n", img->pixel[i][j].g);
+          fprintf(imagem_saida, "%d\n", img->pixel[i][j].b);
         }
        }
     }
@@ -91,9 +91,9 @@ void printaTeste(Imagem *img){
 
    for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          printf("%d\n", img->Pixel[i][j].r);
-          printf("%d\n", img->Pixel[i][j].g);
-          printf("%d\n", img->Pixel[i][j].b);
+          printf("%d\n", img->pixel[i][j].r);
+          printf("%d\n", img->pixel[i][j].g);
+          printf("%d\n", img->pixel[i][j].b);
         }
    }
 

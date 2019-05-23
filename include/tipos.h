@@ -17,7 +17,7 @@ typedef struct{
     int linha; 
     int coluna; 
     int max_value;
-	Pixel **Pixel; //Matriz de pixels.
+	Pixel **pixel; //Matriz de pixels.
 }Imagem;
 
 #endif
