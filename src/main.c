@@ -16,6 +16,7 @@ int main(int argc, char const *argv[])
 
   do{
     
+    printf("\n");
     printf("qual operação deseja fazer na imagem?\n");
     printf("$'cin'\t->\tConverte para escala cinza\n");
     printf("$'thr'\t->\tBinarização da imagem usando thresholding\n");
@@ -25,8 +26,10 @@ int main(int argc, char const *argv[])
     printf("$'amp'\t->\tAmpliar a imagem\n");
     printf("$'red'\t->\tReduzir a imagem\n");
     printf("$'exi' para sair\n");
+    printf("\n");
 
-    gets(cmd);//can't be in final version
+    scanf("%s", cmd); 
+    getchar();
 
     
 
@@ -54,7 +57,7 @@ int main(int argc, char const *argv[])
     	LerImagem(argv[1], &entrada);
     }
     else if(strcmp(cmd, exi) == 0){
-    	printf("\n\nPrograma Encerrado\n\n");
+    	printf("\n\n~~Programa Encerrado~~\n\n");
     	control = 0;
     }
     else{
