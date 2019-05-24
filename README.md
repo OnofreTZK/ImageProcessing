@@ -2,6 +2,6 @@
 
 ### Desenvolvido por:
 * [Tiago Onofre Araujo](https://github.com/OnofreTZK)
-* Vitoria Deon
+* [Vitoria Deon](https://github.com/vickydeon)
 
 ### to do'
