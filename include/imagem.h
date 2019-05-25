@@ -3,6 +3,7 @@
 
 
 #include "tipos.h"
+#include <string.h>
 
 
 //Função para ler a imagem e salvar os dados em uma struct.
