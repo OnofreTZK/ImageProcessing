@@ -9,7 +9,7 @@ int i, j; //Declarei globalmente pois sera bastante usado nas operações com ma
 
 int MediaPixel(Pixel **pixel, int i, int j){
    int media;
-
+   //Método da combinação linear para conversão em escala cinza(a imagem fica mais suave)
    media = ((RedW*pixel[i][j].r) + (GreenW*pixel[i][j].g) + (BlueW*pixel[i][j].b));
 
    return media; 
