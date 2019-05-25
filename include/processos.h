@@ -2,7 +2,6 @@
 #define process_h
 
 #include "imagem.h"
-#include <string.h>
 
 //Alteração da imagem para escala em cinza
 void ImagemCinza(Imagem *img);
