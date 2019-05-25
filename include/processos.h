@@ -8,6 +8,6 @@
 void ImagemCinza(Imagem *img);
 
 //Função para retornar a media do pixel e processa-lo em uma escala cinza.
-unsigned int MediaPixel(Pixel **pixel, int i, int j);
+int MediaPixel(Pixel **pixel, int i, int j);
 
 #endif
