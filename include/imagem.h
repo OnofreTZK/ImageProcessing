@@ -18,4 +18,4 @@ void AlocaMatriz(Imagem *img);
 //Função para gerar a imagem em outro arquivo a partir da struct.
 void CriarImagem(const char *nome_arquivo, Imagem *img);
 
-#endif
+#endif  
