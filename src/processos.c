@@ -48,15 +48,15 @@ void Segmentation(Imagem *img){
   	for(j = 0;j<img->coluna;j++){
   		//Checagem de cada pixel em relacao ao limiar para atribuicao de 0 ou 255 em cada rgb.
   		if(img->pixel[i][j].r > v_limiar){
-           img->pixel[i][j].r = VMax;
-           img->pixel[i][j].g = VMax;
-           img->pixel[i][j].b = VMax; 			
+            img->pixel[i][j].r = VMax;
+            img->pixel[i][j].g = VMax;
+            img->pixel[i][j].b = VMax; 			
   		}
   		else{
-           img->pixel[i][j].r = 0;
-           img->pixel[i][j].g = 0; 
-           img->pixel[i][j].b = 0;  
+            img->pixel[i][j].r = 0;
+            img->pixel[i][j].g = 0; 
+            img->pixel[i][j].b = 0;  
   		}
   	 }
-   }
+  }
 }
