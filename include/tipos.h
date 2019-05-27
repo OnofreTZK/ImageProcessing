@@ -20,5 +20,6 @@ typedef struct{
     Pixel **pixel; //Matriz de pixels.
 }Imagem;  
 
+
 #endif
 
