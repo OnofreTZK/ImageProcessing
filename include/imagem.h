@@ -3,6 +3,7 @@
 
 
 #include "tipos.h"
+#include <string.h>
 
 
 //Função para ler a imagem e salvar os dados em uma struct.
@@ -15,6 +16,6 @@ void printaTeste(Imagem *img);
 void AlocaMatriz(Imagem *img);
 
 //Função para gerar a imagem em outro arquivo a partir da struct.
-void CriaImagem(Imagem *img);
+void CriarImagem(const char *nome_arquivo, Imagem *img);
 
 #endif

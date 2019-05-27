@@ -48,9 +48,9 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
 
 
 
-void CriaImagem(Imagem *img){
+void CriarImagem(const char *nome_arquivo, Imagem *img){
   
-  FILE *imagem_saida = fopen("teste.ppm", "w");
+  FILE *imagem_saida = fopen(nome_arquivo, "w");
 
   
   if(imagem_saida == NULL){
