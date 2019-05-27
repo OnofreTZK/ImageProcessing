@@ -13,3 +13,4 @@ int MediaPixel(Pixel **pixel, int i, int j);
 void Segmentation(Imagem *img);
 
 #endif
+

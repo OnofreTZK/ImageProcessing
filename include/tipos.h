@@ -13,7 +13,7 @@ typedef struct{
 
 //Tipo imagem
 typedef struct{
-	char ID[3];
+    char ID[3];
     int linha; 
     int coluna; 
     int max_value;
