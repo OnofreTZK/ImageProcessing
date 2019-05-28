@@ -17,8 +17,13 @@ const char *getFilename(char *buffer, size_t bf_size) {
 
 
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
+  
+ if(argc < 2){
+   printf("Nenhuma imagem está sendo utilidada no programa, execute-o passando como parâmetro\n");
+   printf("\tEx: ./<nome executavel> <nome_arquivo.ppm>\n");
+}
+ else{
 
     char cmd[10]; //comando do usuario.
     int control = 1; //controle do menu.
@@ -96,9 +101,8 @@ int main(int argc, char const *argv[])
     }while(control == 1);
 
 
-
-
-
+  }
+ 
 
     return 0;   
 }
