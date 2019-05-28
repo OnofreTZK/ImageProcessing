@@ -21,7 +21,7 @@ int MediaPixel(Pixel **pixel, int i, int j){
 
 void ImagemCinza(Imagem *img){
  
- int opti; // otimizador para aplicar a escala cinza 4x com o intuito de eliminar qualquer vestigio de cor.
+ int opti; // otimizador para aplicar a escala cinza n vezes com o intuito de eliminar qualquer vestigio de cor.
   
  for(opti = 0;opti<7;opti++){  
      for(i = 0;i<img->linha;i++){
