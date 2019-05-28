@@ -59,4 +59,4 @@ void Segmentation(Imagem *img){
   		}
   	 }
   }
-}
+} 
