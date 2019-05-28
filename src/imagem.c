@@ -19,6 +19,9 @@ void AlocaMatriz(Imagem *img){
 //Ler os dados do arquivo.ppm e armazena-los em uma struct(onde iremos usar os dados para os processos de manipulação).
 void LerImagem(const char *nome_arquivo, Imagem *img){
   
+  char Head1[3] = "P3";
+  char Head2[2] = "P6";
+
   FILE *imagem_entrada = fopen(nome_arquivo, "r");
 
   
@@ -28,20 +31,27 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
   }
     else{
       fgets(img->ID, 3, imagem_entrada);
-      fscanf(imagem_entrada, "%d %d", &img->linha, &img->coluna);
-      fscanf(imagem_entrada, "%d", &img->max_value);
       
-      AlocaMatriz(img);//Alocando espaço necessário para os pixels.
-
-      for(i = 0;i<img->linha;i++){
-        for(j = 0;j<img->coluna;j++){
-          fscanf(imagem_entrada, " %hd", &img->pixel[i][j].r);
-          fscanf(imagem_entrada, " %hd", &img->pixel[i][j].g);
-          fscanf(imagem_entrada, " %hd", &img->pixel[i][j].b);
+        if(strcmp(img->ID, Head1) != 0){
+          printf("\nFormato de imagem não comportado, por favor utilive um arquivo '.ppm'\n");
+          exit(1);
         }
-      }
-    }
+         else{
+            fscanf(imagem_entrada, "%d %d", &img->linha, &img->coluna);
+            fscanf(imagem_entrada, "%d", &img->max_value);
+      
+            AlocaMatriz(img);//Alocando espaço necessário para os pixels.
 
+            for(i = 0;i<img->linha;i++){
+              for(j = 0;j<img->coluna;j++){
+                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].r);
+                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].g);
+                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].b);
+              }
+            }
+          }
+        }
+    
     fclose(imagem_entrada);
 }
 
@@ -49,6 +59,7 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
 
 
 void CriarImagem(const char *nome_arquivo, Imagem *img){
+  
   
   FILE *imagem_saida = fopen(nome_arquivo, "w");
 
@@ -72,6 +83,8 @@ void CriarImagem(const char *nome_arquivo, Imagem *img){
         }
        }
     }
+
+    printf("\n\t Imagem gerada com sucesso!\n");
 
     fclose(imagem_saida);
 }
