@@ -3,6 +3,8 @@
 
 //Função para o usuário nomear o arquivo para cada operação.
 const char *getFilename(char *buffer, size_t bf_size) {
+    printf("\nInsira o nome do arquivo acrescentando '.ppm':\n\tEx: 'nome_arquivo.ppm'\n\n");
+
     char *ch = fgets(buffer, bf_size, stdin);
 
     for(int i = 0; i < bf_size; i++) {
@@ -59,18 +61,12 @@ int main(int argc, char const *argv[]){
         if(strcmp(cmd, cin) == 0){
             LerImagem(argv[1], &entrada);
             ImagemCinza(&entrada);
-
-            printf("\nInsira o nome do arquivo acrescentando '.ppm':\n\tEx: 'nome_arquivo.ppm'\n\n");
-
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
         }
         else if(strcmp(cmd, thr) == 0){
             LerImagem(argv[1], &entrada);
             ImagemCinza(&entrada);
             Segmentation(&entrada);
-
-            printf("\nInsira o nome do arquivo acrescentando '.ppm':\n\tEx: 'nome_arquivo.ppm'\n\n");
-
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
         }
         else if(strcmp(cmd, blu) == 0){
