@@ -74,6 +74,8 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
+            Sharpening(&entrada);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);

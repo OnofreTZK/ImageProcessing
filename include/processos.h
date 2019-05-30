@@ -12,5 +12,8 @@ int MediaPixel(Pixel **pixel, int i, int j);
 //Binarizar a imagem(preto e branco) a partir da escala cinza
 void Segmentation(Imagem *img);
 
+//Função para 'afiar' a imagem(sharpen).
+void Sharpening(Imagem *img);
+
 #endif
 
