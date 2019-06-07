@@ -44,9 +44,9 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
 
             for(i = 0;i<img->linha;i++){
               for(j = 0;j<img->coluna;j++){
-                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].r);
-                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].g);
-                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].b);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].r);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].g);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].b);
               }
             }
           }
