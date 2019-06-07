@@ -19,6 +19,7 @@ int MediaPixel(Pixel **pixel, int i, int j){
 
 
 
+
 void ImagemCinza(Imagem *img){
 
     int opti; // otimizador para aplicar a escala cinza n vezes com o intuito de eliminar qualquer vestigio de cor.
@@ -37,12 +38,30 @@ void ImagemCinza(Imagem *img){
 
 
 
+int Limiar(Imagem *img, int linha, int coluna){
+    int media = 0;
+
+    for(i = 0; i < linha; i++){
+        for(j = 0; j < coluna; j++){
+            media += img->pixel[i][j].r;            
+            media += img->pixel[i][j].g;
+            media += img->pixel[i][j].b;
+        }
+    }
+
+    return media/((linha*coluna)*3); //A media retornada deve ser o valor de todos os pixels(Linha*coluna)*3 pixels(rgb).
+}
+
+
+
+
 void Segmentation(Imagem *img){
 
     int v_limiar;
-    printf("\nInsira do valor do limiar:\n");
-    scanf(" %d", &v_limiar);
-    getchar();
+    
+    v_limiar = Limiar(img, img->linha, img->coluna);// a melhor binarização é feita fazendo a media dos pixels da matriz.
+
+    printf("\n\tlimiar = %d\n", v_limiar);   
 
     for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
@@ -64,26 +83,104 @@ void Segmentation(Imagem *img){
 
 
 
+
 void Sharpening(Imagem *img){
-    int filter[3][3] = {0, -1, 0, -1, 5, -1, 0, -1, 0};
+    int filter[3][3] = {{0, -1, 0},
+                        {-1, 5, -1},
+                        {0, -1, 0}};
 
-    for(i = 0; i < img->linha; i++){
-        for(j = 0; j < img->coluna; j++){
-            int auxr, auxg, auxb, central1 = i+k+1, central2 = j+l+1;
-            for(k = -1; k<=1; k++){
-                for(l = -1; l<=1; l++){
+    for(i = 1; i < img->linha-1; i++){
+        for(j = 1; j < img->coluna-1; j++){
+            int aux_r = 0, aux_g = 0, aux_b = 0;
+            for(k = 0; k<3; k++){
+                for(l = 0; l<3; l++){
+                    //if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 == img->linha || j+l-1 == img->coluna){
+                      //  continue; 
+                 // }
+                   
+                   aux_r += (img->pixel[i-1+k][j-1+l].r) * filter[k][l];
+                   aux_g += (img->pixel[i-1+k][j-1+l].g) * filter[k][l];
+                   aux_b += (img->pixel[i-1+k][j-1+l].b) * filter[k][l];
 
-
-                    // if(central1 >= 0 && central1 < img->linha && central2 >= 0 && central2 < img->coluna){
-                    //   auxr = (img->pixel[central1][central2].r * filter[k+1][l+1]);
-                    //   auxg = (img->pixel[central1][central2].g * filter[k+1][l+1]);
-                    //   auxb = (img->pixel[central1][central2].b * filter[k+1][l+1]);
-                    // }
                 }
             }
-            img->pixel[i][j].r = auxr;
-            img->pixel[i][j].g = auxg;     
-            img->pixel[i][j].b = auxb;            
+              if(aux_r > 255){
+                aux_r = 255;
+            }
+            if(aux_r < 0){
+                aux_r = 0;
+            }
+            if(aux_g > 255){
+                aux_g = 255;
+            }
+            if(aux_g < 0){
+                aux_g = 0;
+            }
+            if(aux_b > 255){
+                aux_b = 255;
+            }
+            if(aux_b < 0){
+                aux_b = 0;
+            }
+
+            img->pixel[i][j].r = aux_r;
+            img->pixel[i][j].g = aux_g;
+            img->pixel[i][j].b = aux_b;            
         }
     }
+}
+
+
+
+
+
+void Blur(Imagem *img){
+    float filter[3][3] = {{ 0.0625, 0.125, 0.0625 },
+                          { 0.125, 0.25, 0.125 },
+                          { 0.0625, 0.125, 0.0625}};
+
+    int aux_r, aux_g, aux_b;
+
+    for(i = 1; i < img->linha - 1; i++){
+        for(j = 1; j < img->coluna - 1; j++){
+            aux_r = 0, aux_g = 0, aux_b = 0;
+            for(k = 0; k<3; k++){
+                for(l = 0; l<3; l++){
+                    //if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 == img->linha || j+l-1 == img->coluna){
+                       // continue; 
+                  //}
+                   
+                   aux_r += (img->pixel[i-1+k][j-1+l].r) * filter[k][l];
+                   aux_g += (img->pixel[i-1+k][j-1+l].g) * filter[k][l];
+                   aux_b += (img->pixel[i-1+k][j-1+l].b) * filter[k][l];
+                   
+                }
+            }
+
+            if(aux_r > 255){
+                aux_r = 255;
+            }
+            if(aux_r < 0){
+                aux_r = 0;
+            }
+            if(aux_g > 255){
+                aux_g = 255;
+            }
+            if(aux_g < 0){
+                aux_g = 0;
+            }
+            if(aux_b > 255){
+                aux_b = 255;
+            }
+            if(aux_b < 0){
+                aux_b = 0;
+            }
+            
+            img->pixel[i][j].r = aux_r;
+            img->pixel[i][j].g = aux_g;
+            img->pixel[i][j].b = aux_b;             
+        }
+    }
+
+
 }

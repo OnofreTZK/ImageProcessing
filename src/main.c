@@ -71,9 +71,14 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, blu) == 0){
             LerImagem(argv[1], &entrada);
+            Blur(&entrada);
+            Blur(&entrada);
+            Blur(&entrada);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
         }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
+            Blur(&entrada);
             Sharpening(&entrada);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
         }
