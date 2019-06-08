@@ -16,10 +16,13 @@ void Segmentation(Imagem *img);
 int Limiar(Imagem *img, int linha, int coluna);
 
 //Função para 'afiar' a imagem(sharpen).
-void Sharpening(Imagem *img);
+Imagem *Sharpening(Imagem *img, Imagem *img2);
 
 //Função para borrar a imagem(Blur Box).
-void Blur(Imagem *img);
+Imagem *Blur(Imagem *img, Imagem *img2);
+
+//Função para realizar a detecção de bordas
+Imagem *Bordas(Imagem *img, Imagem*img2);
 
 #endif
 
