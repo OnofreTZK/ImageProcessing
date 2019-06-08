@@ -1,24 +1,6 @@
 #include "util.h"
 
 
-//Função para o usuário nomear o arquivo para cada operação.
-const char *getFilename(char *buffer, size_t bf_size) {
-    printf("\nInsira o nome do arquivo acrescentando '.ppm':\n\tEx: 'nome_arquivo.ppm'\n\n");
-
-    char *ch = fgets(buffer, bf_size, stdin);
-
-    for(int i = 0; i < bf_size; i++) {
-        if( *(buffer+i) != '\0' && *(ch+i) == '\n') {
-            *(buffer+i) = '\0'; //Substituição do '\n' pelo '\0'
-        }
-    }
-    return buffer;
-}
-
-
-
-
-
 int main(int argc, char const *argv[]){
   
  if(argc < 2){
@@ -32,6 +14,10 @@ int main(int argc, char const *argv[]){
 
 
     Imagem entrada; //variavel que irá armazenar a imagem.
+    Imagem Output;
+    Imagem Output2;
+    Imagem Output3;
+
 
 
     printf("#### PHOTOSHOP20 ####\n\n");
@@ -43,6 +29,7 @@ int main(int argc, char const *argv[]){
         printf("qual operação deseja fazer na imagem?\n");
         printf("$'cin'\t->\tConverte para escala cinza\n");
         printf("$'thr'\t->\tBinarização da imagem usando thresholding\n");
+        printf("$'brd'\t->\tDetectar bordas\n");
         printf("$'blu'\t->\tExecuta blurring\n");
         printf("$'sha'\t->\tExecuta sharpening\n");
         printf("$'rot'\t->\tRotaciona a imagem\n");
@@ -69,18 +56,23 @@ int main(int argc, char const *argv[]){
             Segmentation(&entrada);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
         }
+        else if(strcmp(cmd, brd) == 0){
+            LerImagem(argv[1], &entrada);
+            ImagemCinza(&entrada);
+            Segmentation(&entrada);
+            Bordas(&entrada, &Output);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output);     
+        }
         else if(strcmp(cmd, blu) == 0){
             LerImagem(argv[1], &entrada);
-            Blur(&entrada);
-            Blur(&entrada);
-            Blur(&entrada);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
+            Blur(&entrada, &Output);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output);
         }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
-            Blur(&entrada);
-            Sharpening(&entrada);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
+            Blur(&entrada, &Output);
+            Sharpening(&Output, &Output2);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);

@@ -20,7 +20,6 @@ void AlocaMatriz(Imagem *img){
 void LerImagem(const char *nome_arquivo, Imagem *img){
   
   char Head1[3] = "P3";
-  char Head2[2] = "P6";
 
   FILE *imagem_entrada = fopen(nome_arquivo, "r");
 
@@ -53,6 +52,34 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
         }
     
     fclose(imagem_entrada);
+}
+
+
+
+
+void HeaderCopy(Imagem *img, Imagem *img2){
+
+    strcpy(img2->ID, img->ID);
+    img2->linha = img->linha;
+    img2->coluna = img->coluna;
+    img2->max_value = img->max_value;
+}
+
+
+
+
+//Função para o usuário nomear o arquivo para cada operação.
+const char *getFilename(char *buffer, size_t bf_size) {
+    printf("\nInsira o nome do arquivo acrescentando '.ppm':\n\tEx: 'nome_arquivo.ppm'\n\n");
+
+    char *ch = fgets(buffer, bf_size, stdin);
+
+    for(int i = 0; i < bf_size; i++) {
+        if( *(buffer+i) != '\0' && *(ch+i) == '\n') {
+            *(buffer+i) = '\0'; //Substituição do '\n' pelo '\0'
+        }
+    }
+    return buffer;
 }
 
 

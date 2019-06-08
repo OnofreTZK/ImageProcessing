@@ -18,4 +18,10 @@ void AlocaMatriz(Imagem *img);
 //Função para gerar a imagem em outro arquivo a partir da struct.
 void CriarImagem(const char *nome_arquivo, Imagem *img);
 
+//Função para copiar o header de uma imagem para outra.
+void HeaderCopy(Imagem *img, Imagem *img2);
+
+//Função para o usuário nomear um arquivo para cada operação.
+const char *getFilename(char *buffer, size_t bf_size);
+
 #endif  
