@@ -127,15 +127,14 @@ Imagem *Sharpening(Imagem *img, Imagem *img2){
                 aux_b = 0;
             }
 
-            img2->pixel[i][j].r = aux_r;
-            img2->pixel[i][j].g = aux_g;
-            img2->pixel[i][j].b = aux_b;            
+            img2->pixel[i][j].r = (unsigned int) (aux_r);
+            img2->pixel[i][j].g = (unsigned int) (aux_g);
+            img2->pixel[i][j].b = (unsigned int) (aux_b);            
         }
     }
 
     return img2;
 }
-
 
 
 
@@ -151,53 +150,103 @@ Imagem *Blur(Imagem *img, Imagem *img2){
     HeaderCopy(img, img2);
     
     AlocaMatriz(img2);
-
-    for(i = 0; i < img->linha; i++){
-        for(j = 0; j < img->coluna; j++){
-            aux_r = 0, aux_g = 0, aux_b = 0;
-            for(k = 0; k<3; k++){
-                for(l = 0; l<3; l++){
+    
+        for(i = 0; i < img->linha; i++){
+            for(j = 0; j < img->coluna; j++){
+                aux_r = 0, aux_g = 0, aux_b = 0;
+                for(k = 0; k<3; k++){
+                    for(l = 0; l<3; l++){
                     
-                    if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
-                        continue; 
+                        if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
+                            continue; 
+                        }
+                   
+                       aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l]);
+                       aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l]);
+                       aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l]);
+                   
                     }
-                   
-                   aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l]);
-                   aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l]);
-                   aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l]);
-                   
                 }
-            }
-
-            if(aux_r > 255){
-                aux_r = 255;
-            }
-            if(aux_r < 0){
-                aux_r = 0;
-            }
-            if(aux_g > 255){
-                aux_g = 255;
-            }
-            if(aux_g < 0){
-                aux_g = 0;
-            }
-            if(aux_b > 255){
-                aux_b = 255;
-            }
-            if(aux_b < 0){
-                aux_b = 0;
-            }
             
-            img2->pixel[i][j].r = aux_r;
-            img2->pixel[i][j].g = aux_g;
-            img2->pixel[i][j].b = aux_b;            
+                if(aux_r > 255){
+                    aux_r = 255;
+                }
+                if(aux_r < 0){
+                    aux_r = 0;
+                }
+                if(aux_g > 255){
+                    aux_g = 255;
+                }
+                if(aux_g < 0){
+                    aux_g = 0;
+                }
+                if(aux_b > 255){
+                    aux_b = 255;
+                }
+                if(aux_b < 0){
+                    aux_b = 0;
+                } 
+            
+                img2->pixel[i][j].r = (unsigned int) (aux_r);
+                img2->pixel[i][j].g = (unsigned int) (aux_g);
+                img2->pixel[i][j].b = (unsigned int) (aux_b);            
+            }
         }
-    }
-
+    
     
     return img2;
 
+
 }
+
+
+
+
+void Blurtimes(Imagem *img, Imagem *img2){
+    int count;
+    int control = 1;
+
+    Imagem ctrl1;
+    Imagem ctrl2;
+    Imagem ctrl3; //Limite de borragens nesse programa será 4.
+
+    printf("\tQuantas vezes deseja borrar a imagem? mínimo = 1 e máximo = 4\n\t\t*Recomendado neste programa é 3\n");
+
+    do{
+        
+        scanf("%d", &count);
+
+        
+        if(count == 1){ 
+            Blur(img, img2); 
+            control = 0;
+        }
+        else if(count == 2){
+            Blur(img, &ctrl1); 
+            Blur(&ctrl1, img2); 
+            control = 0;
+        }
+        else if(count == 3){
+            Blur(img, &ctrl1); 
+            Blur(&ctrl1, &ctrl2); 
+            Blur(&ctrl2, img2); 
+            control = 0;
+        }
+        else if(count == 4){ 
+            Blur(img, &ctrl1); 
+            Blur(&ctrl1, &ctrl2); 
+            Blur(&ctrl2, &ctrl3); 
+            Blur(&ctrl3, img2); 
+            control = 0;
+        }
+        else{
+            printf("\nNúmero inválido! Por favor selecione um numero de repetições entre 1 e 4!\n");
+        }  
+          
+
+    }while(control == 1 );
+
+} 
 
 
 
@@ -213,48 +262,52 @@ Imagem *Bordas(Imagem *img, Imagem *img2){
     HeaderCopy(img, img2);
     
     AlocaMatriz(img2);
-
-    for(i = 0; i < img->linha; i++){
-        for(j = 0; j < img->coluna; j++){
-            aux_r = 0, aux_g = 0, aux_b = 0;
-            for(k = 0; k<3; k++){
-                for(l = 0; l<3; l++){
+    
+    
+        for(i = 0; i < img->linha; i++){
+            for(j = 0; j < img->coluna; j++){
+                aux_r = 0, aux_g = 0, aux_b = 0;
+                for(k = 0; k<3; k++){
+                    for(l = 0; l<3; l++){
                     
-                    if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
-                        continue; 
+                        if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
+                            continue; 
+                        }
+                   
+                       aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l]);
+                       aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l]);
+                       aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l]);
+                   
                     }
-                   
-                   aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l]);
-                   aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l]);
-                   aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l]);
-                   
                 }
-            }
 
-            if(aux_r > 255){
-                aux_r = 255;
-            }
-            if(aux_r < 0){
-                aux_r = 0;
-            }
-            if(aux_g > 255){
-                aux_g = 255;
-            }
-            if(aux_g < 0){
-                aux_g = 0;
-            }
-            if(aux_b > 255){
-                aux_b = 255;
-            }
-            if(aux_b < 0){
-                aux_b = 0;
-            }
+                if(aux_r > 255){
+                    aux_r = 255;
+                }
+                if(aux_r < 0){
+                    aux_r = 0;
+                }
+                if(aux_g > 255){
+                    aux_g = 255;
+                }
+                if(aux_g < 0){
+                    aux_g = 0;
+                }
+                if(aux_b > 255){
+                    aux_b = 255;
+                }
+                if(aux_b < 0){
+                    aux_b = 0;
+                } 
             
-            img2->pixel[i][j].r = aux_r;
-            img2->pixel[i][j].g = aux_g;
-            img2->pixel[i][j].b = aux_b;            
+                img2->pixel[i][j].r = (unsigned int) (aux_r);
+                img2->pixel[i][j].g = (unsigned int) (aux_g);
+                img2->pixel[i][j].b = (unsigned int) (aux_b);            
+            }
         }
-    }
+
+        
+    
 
     
     return img2;

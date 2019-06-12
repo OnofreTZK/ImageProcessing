@@ -9,9 +9,21 @@ void AlocaMatriz(Imagem *img){
 
   img->pixel = (Pixel**) malloc(img->linha*sizeof(Pixel*));
   
-  for(int i = 0;i<img->linha;i++){
+  for(int i = 0; i < img->linha; i++){
     img->pixel[i] = (Pixel*) malloc(img->coluna*sizeof(Pixel));
   }
+}
+
+
+
+
+void LiberaMemoria(Imagem *img){
+  
+  for(i = 0;i < img->linha; i++){
+    free(img->pixel[i]);
+  }
+
+  free(img->pixel);
 }
 
 
@@ -43,9 +55,9 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
 
             for(i = 0;i<img->linha;i++){
               for(j = 0;j<img->coluna;j++){
-                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].r);
-                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].g);
-                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].b);
+                fscanf(imagem_entrada, "%d", &img->pixel[i][j].r);
+                fscanf(imagem_entrada, "%d", &img->pixel[i][j].g);
+                fscanf(imagem_entrada, "%d", &img->pixel[i][j].b);
               }
             }
           }
@@ -70,16 +82,24 @@ void HeaderCopy(Imagem *img, Imagem *img2){
 
 //Função para o usuário nomear o arquivo para cada operação.
 const char *getFilename(char *buffer, size_t bf_size) {
-    printf("\nInsira o nome do arquivo acrescentando '.ppm':\n\tEx: 'nome_arquivo.ppm'\n\n");
+    printf("\nInsira o nome do arquivo:\n\t`->Não é necessário colocar '.ppm' o programa faz isso automaticamente.\n\n");
+    int control = 1;
 
-    char *ch = fgets(buffer, bf_size, stdin);
+  
+      char *ch = fgets(buffer, bf_size, stdin);
 
-    for(int i = 0; i < bf_size; i++) {
-        if( *(buffer+i) != '\0' && *(ch+i) == '\n') {
-            *(buffer+i) = '\0'; //Substituição do '\n' pelo '\0'
-        }
-    }
-    return buffer;
+      for(i = 0; i < bf_size; i++) {
+          if( *(buffer+i) != '\0' && *(ch+i) == '\n') {
+              *(buffer+i) = '\0'; //Substituição do '\n' pelo '\0'
+          }
+      }
+      
+      char valid[5] = ".ppm";
+
+      strcat(buffer, valid);
+
+      return buffer;
+    
 }
 
 
@@ -104,9 +124,9 @@ void CriarImagem(const char *nome_arquivo, Imagem *img){
 
        for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          fprintf(imagem_saida, "%hd\n", img->pixel[i][j].r);
-          fprintf(imagem_saida, "%hd\n", img->pixel[i][j].g);
-          fprintf(imagem_saida, "%hd\n", img->pixel[i][j].b);
+          fprintf(imagem_saida, "%d\n", img->pixel[i][j].r);
+          fprintf(imagem_saida, "%d\n", img->pixel[i][j].g);
+          fprintf(imagem_saida, "%d\n", img->pixel[i][j].b);
         }
        }
     }
@@ -131,9 +151,9 @@ void printaTeste(Imagem *img){
 
    for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          printf("%hd\n", img->pixel[i][j].r);
-          printf("%hd\n", img->pixel[i][j].g);
-          printf("%hd\n", img->pixel[i][j].b); 
+          printf("%d\n", img->pixel[i][j].r);
+          printf("%d\n", img->pixel[i][j].g);
+          printf("%d\n", img->pixel[i][j].b); 
         }
    }
 
