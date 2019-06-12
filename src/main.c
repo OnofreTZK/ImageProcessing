@@ -1,6 +1,5 @@
 #include "util.h"
 
-
 int main(int argc, char const *argv[]){
   
  if(argc < 2){
@@ -17,6 +16,7 @@ int main(int argc, char const *argv[]){
     Imagem Output;
     Imagem Output2;
     Imagem Output3;
+    Imagem Output4;
 
 
 
@@ -66,13 +66,17 @@ int main(int argc, char const *argv[]){
         else if(strcmp(cmd, blu) == 0){
             LerImagem(argv[1], &entrada);
             Blur(&entrada, &Output);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &Output);
+            Blur(&Output, &Output2);
+            Blur(&Output2, &Output3);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output3);
         }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
             Blur(&entrada, &Output);
-            Sharpening(&Output, &Output2);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
+            Blur(&Output, &Output2);
+            Blur(&Output2, &Output3);
+            Sharpening(&Output3, &Output4);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output4);
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);

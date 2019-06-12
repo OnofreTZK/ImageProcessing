@@ -7,7 +7,7 @@
 
 //Tipo Pixel
 typedef struct{
-	unsigned short int r, g, b; //Estrutura rgb(Red, Green, blue) que compõe um pixel.
+	unsigned int r, g, b; //Estrutura rgb(Red, Green, blue) que compõe um pixel.
 }Pixel;
 
 

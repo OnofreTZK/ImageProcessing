@@ -15,6 +15,9 @@ void printaTeste(Imagem *img);
 //Função para alocar dinamicamente a matriz que irá receber os pixels.
 void AlocaMatriz(Imagem *img);
 
+//Função para liberar a memoria alocada nas matrizes.
+void LiberaMemoria(Imagem *img);
+
 //Função para gerar a imagem em outro arquivo a partir da struct.
 void CriarImagem(const char *nome_arquivo, Imagem *img);
 
