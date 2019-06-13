@@ -24,7 +24,7 @@ void ImagemCinza(Imagem *img){
 
     int opti; // otimizador para aplicar a escala cinza n vezes com o intuito de eliminar qualquer vestigio de cor.
 
-    for(opti = 0;opti<7;opti++){  
+    for(opti = 0;opti<3;opti++){  
         for(i = 0;i<img->linha;i++){
             for(j = 0;j<img->coluna;j++){
                 img->pixel[i][j].r = MediaPixel(img->pixel, i, j);
@@ -127,9 +127,9 @@ Imagem *Sharpening(Imagem *img, Imagem *img2){
                 aux_b = 0;
             }
 
-            img2->pixel[i][j].r = (unsigned int) (aux_r);
-            img2->pixel[i][j].g = (unsigned int) (aux_g);
-            img2->pixel[i][j].b = (unsigned int) (aux_b);            
+            img2->pixel[i][j].r = (unsigned short int) (aux_r);
+            img2->pixel[i][j].g = (unsigned short int) (aux_g);
+            img2->pixel[i][j].b = (unsigned short int) (aux_b);            
         }
     }
 
@@ -187,9 +187,9 @@ Imagem *Blur(Imagem *img, Imagem *img2){
                     aux_b = 0;
                 } 
             
-                img2->pixel[i][j].r = (unsigned int) (aux_r);
-                img2->pixel[i][j].g = (unsigned int) (aux_g);
-                img2->pixel[i][j].b = (unsigned int) (aux_b);            
+                img2->pixel[i][j].r = (unsigned short int) (aux_r);
+                img2->pixel[i][j].g = (unsigned short int) (aux_g);
+                img2->pixel[i][j].b = (unsigned short int) (aux_b);            
             }
         }
     
@@ -198,55 +198,6 @@ Imagem *Blur(Imagem *img, Imagem *img2){
 
 
 }
-
-
-
-
-void Blurtimes(Imagem *img, Imagem *img2){
-    int count;
-    int control = 1;
-
-    Imagem ctrl1;
-    Imagem ctrl2;
-    Imagem ctrl3; //Limite de borragens nesse programa será 4.
-
-    printf("\tQuantas vezes deseja borrar a imagem? mínimo = 1 e máximo = 4\n\t\t*Recomendado neste programa é 3\n");
-
-    do{
-        
-        scanf("%d", &count);
-
-        
-        if(count == 1){ 
-            Blur(img, img2); 
-            control = 0;
-        }
-        else if(count == 2){
-            Blur(img, &ctrl1); 
-            Blur(&ctrl1, img2); 
-            control = 0;
-        }
-        else if(count == 3){
-            Blur(img, &ctrl1); 
-            Blur(&ctrl1, &ctrl2); 
-            Blur(&ctrl2, img2); 
-            control = 0;
-        }
-        else if(count == 4){ 
-            Blur(img, &ctrl1); 
-            Blur(&ctrl1, &ctrl2); 
-            Blur(&ctrl2, &ctrl3); 
-            Blur(&ctrl3, img2); 
-            control = 0;
-        }
-        else{
-            printf("\nNúmero inválido! Por favor selecione um numero de repetições entre 1 e 4!\n");
-        }  
-          
-
-    }while(control == 1 );
-
-} 
 
 
 
@@ -300,9 +251,9 @@ Imagem *Bordas(Imagem *img, Imagem *img2){
                     aux_b = 0;
                 } 
             
-                img2->pixel[i][j].r = (unsigned int) (aux_r);
-                img2->pixel[i][j].g = (unsigned int) (aux_g);
-                img2->pixel[i][j].b = (unsigned int) (aux_b);            
+                img2->pixel[i][j].r = (unsigned short int) (aux_r);
+                img2->pixel[i][j].g = (unsigned short int) (aux_g);
+                img2->pixel[i][j].b = (unsigned short int) (aux_b);            
             }
         }
 
