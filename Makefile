@@ -12,4 +12,4 @@
 	#gcc -c processos.c
 
 #clean:
-    #rm -f *.o	
+    #rm -f *.o.     	
