@@ -48,16 +48,16 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
           exit(1);
         }
          else{
-            fscanf(imagem_entrada, "%d %d", &img->linha, &img->coluna);
+            fscanf(imagem_entrada, "%d %d", &img->coluna, &img->linha);
             fscanf(imagem_entrada, "%d", &img->max_value);
       
             AlocaMatriz(img);//Alocando espaço necessário para os pixels.
 
             for(i = 0;i<img->linha;i++){
               for(j = 0;j<img->coluna;j++){
-                fscanf(imagem_entrada, "%d", &img->pixel[i][j].r);
-                fscanf(imagem_entrada, "%d", &img->pixel[i][j].g);
-                fscanf(imagem_entrada, "%d", &img->pixel[i][j].b);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].r);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].g);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].b);
               }
             }
           }
@@ -117,16 +117,16 @@ void CriarImagem(const char *nome_arquivo, Imagem *img){
   }
     else{
       fprintf(imagem_saida, "%s\n", img->ID);
-      fprintf(imagem_saida, "%d %d\n", img->linha, img->coluna);
+      fprintf(imagem_saida, "%d %d\n", img->coluna, img->linha);
       fprintf(imagem_saida, "%d\n", img->max_value);
 
        
 
        for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          fprintf(imagem_saida, "%d\n", img->pixel[i][j].r);
-          fprintf(imagem_saida, "%d\n", img->pixel[i][j].g);
-          fprintf(imagem_saida, "%d\n", img->pixel[i][j].b);
+          fprintf(imagem_saida, "%hd\n", img->pixel[i][j].r);
+          fprintf(imagem_saida, "%hd\n", img->pixel[i][j].g);
+          fprintf(imagem_saida, "%hd\n", img->pixel[i][j].b);
         }
        }
     }
@@ -151,9 +151,9 @@ void printaTeste(Imagem *img){
 
    for(i = 0;i<img->linha;i++){
         for(j = 0;j<img->coluna;j++){
-          printf("%d\n", img->pixel[i][j].r);
-          printf("%d\n", img->pixel[i][j].g);
-          printf("%d\n", img->pixel[i][j].b); 
+          printf("%hd\n", img->pixel[i][j].r);
+          printf("%hd\n", img->pixel[i][j].g);
+          printf("%hd\n", img->pixel[i][j].b); 
         }
    }
 
