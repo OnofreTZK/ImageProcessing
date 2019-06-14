@@ -378,9 +378,9 @@ Imagem *Sobel(Imagem *img, Imagem *img2){
                     img2->pixel[i][j].b = VMax;    
                 }
                 else{
-                    img2->pixel[i][j].r = (unsigned short int) (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));
-                    img2->pixel[i][j].g = (unsigned short int) (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));
-                    img2->pixel[i][j].b = (unsigned short int) (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));    
+                    img2->pixel[i][j].r = (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));
+                    img2->pixel[i][j].g = (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));
+                    img2->pixel[i][j].b = (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));    
                 }           
             }
         }
