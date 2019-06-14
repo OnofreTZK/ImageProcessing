@@ -392,3 +392,153 @@ Imagem *Sobel(Imagem *img, Imagem *img2){
     return img2;
 
 }
+
+
+
+
+Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img->linha, larg = img->coluna;
+
+  //a altura da img1 se transforma na largura da img2, e a largura se transforma em altura
+  HeaderInvert(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, j, larg - i - 1);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *GirarPraDireita(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img->linha, larg = img->coluna;
+
+  //a altura da img1 se transforma na largura da img2, e a largura se transforma em altura
+  HeaderInvert(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, alt - j - 1, i);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img->linha, larg = img->coluna;
+
+  //Cria a img2 com o mesmo tamanho da img1
+  HeaderCopy(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, larg - i - 1, alt - j - 1);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img->linha, larg = img->coluna;
+
+  //Cria a img2 com o mesmo tamanho da img1
+  HeaderCopy(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, larg - i - 1, j);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *EspelharVertical(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img->linha, larg = img->coluna;
+
+  //Cria a img2 com o mesmo tamanho da img1
+  HeaderCopy(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, i, alt - j - 1);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}

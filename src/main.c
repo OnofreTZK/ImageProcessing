@@ -18,6 +18,10 @@ int main(int argc, char const *argv[]){
     Imagem Output3;
     Imagem Output4;
     Imagem Output5;
+    Imagem Output6;
+    Imagem Output7;
+    Imagem Output8;
+    Imagem Output9;
 
 
 
@@ -38,6 +42,7 @@ int main(int argc, char const *argv[]){
         printf("$'rot'\t->\tRotaciona a imagem\n");
         printf("$'amp'\t->\tAmpliar a imagem\n");
         printf("$'red'\t->\tReduzir a imagem\n");
+        printf("$'esp'\t->\tEspelhar a imagem\n");
         printf("$'exi' para sair\n");
         printf("\n");
 
@@ -115,12 +120,55 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);
+            
+            printf("$'esq'\t->\tGirar 90º para a esquerda\n");
+            printf("$'dir'\t->\tGirar 90º para a direita\n");
+            printf("$'cto'\t->\tGirar 180º\n");
+            printf("\n");
+
+            scanf("%s", cmd);
+            getchar();
+
+            if(strcmp(cmd, esq) == 0){
+                GirarEsquerda(&entrada);    
+            }
+            else if(strcmp(cmd, dir) == 0){
+                GirarDireita(&entrada);
+            }
+            else if(strcmp(cmd, cto) == 0){
+                GirarCentoEOitenta(&entrada);
+            }
+
+            CriarImagem(getFileName(fname, FILENAME_MAX), &Output6);
         }
         else if(strcmp(cmd, amp) == 0){
             LerImagem(argv[1], &entrada);
+            AmpliarImagem(&entrada);
+            CriarImagem(getFileName(fname, FILENAME_MAX), &Output7);
         }
         else if(strcmp(cmd, red) == 0){
             LerImagem(argv[1], &entrada);
+            ReduzirImagem(&entrada);
+            CriarImagem(getFileName(fname, FILENAME_MAX), &Output8);
+        }
+        else if(strcmp(cmd, esp) == 0){
+            LerImagem(argv[1], &entrada);
+
+            printf("$'hor'\t->\tEspelhar na horizontal\n");
+            printf("$'ver'\t->\tEspelhar na vertical\n");
+            printf("\n");
+
+            scanf("%s", cmd);
+            getchar();
+
+            if(strcmp(cmd, hor) == 0){
+                EspelharHorizontal(&entrada);   
+            }
+            else if(strcmp(cmd, ver) == 0){
+                EspelharVertical(&entrada);
+            }
+
+            CriarImagem(getFileName(fname, FILENAME_MAX), &Output9);
         }
         else if(strcmp(cmd, exi) == 0){
             printf("~~~~~~~~~~~~~~~~~~~~~~~\n");
