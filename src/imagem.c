@@ -83,8 +83,6 @@ void HeaderCopy(Imagem *img, Imagem *img2){
 //Função para o usuário nomear o arquivo para cada operação.
 const char *getFilename(char *buffer, size_t bf_size) {
     printf("\nInsira o nome do arquivo:\n\t`->Não é necessário colocar '.ppm' o programa faz isso automaticamente.\n\n");
-    int control = 1;
-
   
       char *ch = fgets(buffer, bf_size, stdin);
 
