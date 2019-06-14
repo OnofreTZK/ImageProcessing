@@ -17,6 +17,7 @@ int main(int argc, char const *argv[]){
     Imagem Output2;
     Imagem Output3;
     Imagem Output4;
+    Imagem Output5;
 
 
 
@@ -30,7 +31,9 @@ int main(int argc, char const *argv[]){
         printf("$'cin'\t->\tConverte para escala cinza\n");
         printf("$'thr'\t->\tBinarização da imagem usando thresholding\n");
         printf("$'brd'\t->\tDetectar bordas\n");
+        printf("$'sbl'\t->\tDetectar bordas com o operador de sobel\n");
         printf("$'blu'\t->\tExecuta blurring\n");
+        printf("$'gss'\t->\tExecuta blurring com filtro gaussiano\n");
         printf("$'sha'\t->\tExecuta sharpening\n");
         printf("$'rot'\t->\tRotaciona a imagem\n");
         printf("$'amp'\t->\tAmpliar a imagem\n");
@@ -63,6 +66,13 @@ int main(int argc, char const *argv[]){
             Bordas(&entrada, &Output);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output);     
         }
+        else if(strcmp(cmd, sbl) == 0){
+            LerImagem(argv[1], &entrada);
+            ImagemCinza(&entrada);
+            Gauss(&entrada, &Output);
+            Sobel(&Output, &Output2);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);       
+        }
         else if(strcmp(cmd, blu) == 0){
             LerImagem(argv[1], &entrada);
             Blur(&entrada, &Output);
@@ -70,13 +80,19 @@ int main(int argc, char const *argv[]){
             Blur(&Output2, &Output3);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output3);
         }
+        else if(strcmp(cmd, gss) == 0){
+            LerImagem(argv[1], &entrada);
+            Gauss(&entrada, &Output);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output);   
+        }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
             Blur(&entrada, &Output);
             Blur(&Output, &Output2);
             Blur(&Output2, &Output3);
             Sharpening(&Output3, &Output4);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &Output4);
+            Sharpening(&Output4, &Output5);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output5);
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);

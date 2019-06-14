@@ -1,4 +1,5 @@
 #include "processos.h"
+#include <math.h>
 #define RedW 0.3
 #define GreenW 0.59
 #define BlueW 0.11
@@ -140,9 +141,9 @@ Imagem *Sharpening(Imagem *img, Imagem *img2){
 
 
 Imagem *Blur(Imagem *img, Imagem *img2){
-    float filter[3][3] = {{ 0.0625, 0.125, 0.0625},
-                          { 0.125, 0.25, 0.125},
-                          { 0.0625, 0.125, 0.0625}};
+    float filter[3][3] = {{ 1, 1, 1},
+                          { 1, 1, 1},
+                          { 1, 1, 1}};
 
     
     int aux_r, aux_g, aux_b;
@@ -161,9 +162,9 @@ Imagem *Blur(Imagem *img, Imagem *img2){
                             continue; 
                         }
                    
-                       aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l]);
-                       aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l]);
-                       aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l]);
+                       aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l])/9;
+                       aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l])/9;
+                       aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l])/9;
                    
                     }
                 }
@@ -192,7 +193,7 @@ Imagem *Blur(Imagem *img, Imagem *img2){
                 img2->pixel[i][j].b = (unsigned short int) (aux_b);            
             }
         }
-    
+        
     
     return img2;
 
@@ -254,6 +255,133 @@ Imagem *Bordas(Imagem *img, Imagem *img2){
                 img2->pixel[i][j].r = (unsigned short int) (aux_r);
                 img2->pixel[i][j].g = (unsigned short int) (aux_g);
                 img2->pixel[i][j].b = (unsigned short int) (aux_b);            
+            }
+        }
+
+        
+    
+
+    
+    return img2;
+
+}
+
+
+
+
+Imagem *Gauss(Imagem *img, Imagem *img2){
+    float filter[5][5] = {{1, 4, 6, 4, 1},
+                          {4, 16, 24, 16, 4},
+                          {6, 24, 36, 14, 6},
+                          {4, 16, 24, 16, 4},
+                          {1, 4, 6, 4, 1}};
+
+    
+    int aux_r, aux_g, aux_b;
+    
+    HeaderCopy(img, img2);
+    
+    AlocaMatriz(img2);
+    
+
+        for(i = 0; i < img->linha; i++){
+            for(j = 0; j < img->coluna; j++){
+                aux_r = 0, aux_g = 0, aux_b = 0;
+                for(k = 0; k<5; k++){
+                    for(l = 0; l<5; l++){
+                    
+                        if( i+k-2 < 0 || j+l-2 < 0 || i+k-2 >= img->linha || j+l-2 >= img->coluna){
+                            continue; 
+                        }
+                   
+                       aux_r = aux_r + ((img->pixel[i-2+k][j-2+l].r) * filter[k][l])/256;
+                       aux_g = aux_g + ((img->pixel[i-2+k][j-2+l].g) * filter[k][l])/256;
+                       aux_b = aux_b + ((img->pixel[i-2+k][j-2+l].b) * filter[k][l])/256;
+                   
+                    }
+                }
+
+                if(aux_r > 255){
+                    aux_r = 255;
+                }
+                if(aux_r < 0){
+                    aux_r = 0;
+                }
+                if(aux_g > 255){
+                    aux_g = 255;
+                }
+                if(aux_g < 0){
+                    aux_g = 0;
+                }
+                if(aux_b > 255){
+                    aux_b = 255;
+                }
+                if(aux_b < 0){
+                    aux_b = 0;
+                } 
+            
+                img2->pixel[i][j].r = (unsigned short int) (aux_r);
+                img2->pixel[i][j].g = (unsigned short int) (aux_g);
+                img2->pixel[i][j].b = (unsigned short int) (aux_b);            
+            }
+        }
+     
+        
+    
+
+    
+    return img2;
+
+}
+
+
+
+
+Imagem *Sobel(Imagem *img, Imagem *img2){
+    float Sobel_X[3][3] = {{ -1, 0, 1},
+                           {-2, 0, 2},
+                           { -1, 0, 1}};
+
+    float Sobel_Y[3][3] = {{-1, -2, -1},
+                           {0, 0, 0},
+                           {1, 2, 1}};                     
+
+    
+    int aux_X, aux_Y;
+    
+    HeaderCopy(img, img2);
+    
+    AlocaMatriz(img2);
+    
+    
+        for(i = 0; i < img->linha; i++){
+            for(j = 0; j < img->coluna; j++){
+                aux_X = 0;
+                aux_Y = 0;
+                for(k = 0; k<3; k++){
+                    for(l = 0; l<3; l++){
+                    
+                        if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
+                            continue; 
+                        }
+                   
+                       aux_X = aux_X + ((img->pixel[i-1+k][j-1+l].r) * Sobel_X[k][l]);
+                       aux_Y = aux_Y + ((img->pixel[i-1+k][j-1+l].r) * Sobel_Y[k][l]);
+                       
+                   
+                    }
+                }
+
+                if(sqrt((aux_X*aux_X) + (aux_Y*aux_Y)) > VMax){
+                    img2->pixel[i][j].r = VMax;
+                    img2->pixel[i][j].g = VMax;
+                    img2->pixel[i][j].b = VMax;    
+                }
+                else{
+                    img2->pixel[i][j].r = (unsigned short int) (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));
+                    img2->pixel[i][j].g = (unsigned short int) (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));
+                    img2->pixel[i][j].b = (unsigned short int) (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));    
+                }           
             }
         }
 
