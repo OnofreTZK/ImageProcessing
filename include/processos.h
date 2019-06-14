@@ -30,5 +30,19 @@ Imagem *Gauss(Imagem *img, Imagem *img2);
 //Função para aplicar detecção de bordas com o operador de sobel.
 Imagem *Sobel(Imagem *img, Imagem *img2);
 
-#endif
+//Função para rotacionar a imagem 90° para a esquerda.
+Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2);
 
+//Função para rotacionar a imagem 90° para a direita.
+Imagem *GirarPraDireita(Imagem *img1, Imagem *img2)
+
+//Função para rotacionar a imagem em 180°.
+Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2)
+
+//Função para espelhar a imagem na horizontal.
+Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2);
+
+//Função para espelhar a imagem na vertical.
+Imagem *EspelharVertical(Imagem *img1, Imagem *img2);
+
+#endif
