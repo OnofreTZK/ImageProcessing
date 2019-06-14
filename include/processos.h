@@ -34,10 +34,10 @@ Imagem *Sobel(Imagem *img, Imagem *img2);
 Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2);
 
 //Função para rotacionar a imagem 90° para a direita.
-Imagem *GirarPraDireita(Imagem *img1, Imagem *img2)
+Imagem *GirarPraDireita(Imagem *img1, Imagem *img2);
 
 //Função para rotacionar a imagem em 180°.
-Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2)
+Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2);
 
 //Função para espelhar a imagem na horizontal.
 Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2);

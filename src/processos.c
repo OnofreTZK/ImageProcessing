@@ -399,7 +399,7 @@ Imagem *Sobel(Imagem *img, Imagem *img2){
 Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2){
 
   //alt e larg recebem os valores da imagem
-  int alt = img->linha, larg = img->coluna;
+  int alt = img1->linha, larg = img1->coluna;
 
   //a altura da img1 se transforma na largura da img2, e a largura se transforma em altura
   HeaderInvert(img1, img2);
@@ -429,7 +429,7 @@ Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2){
 Imagem *GirarPraDireita(Imagem *img1, Imagem *img2){
 
   //alt e larg recebem os valores da imagem
-  int alt = img->linha, larg = img->coluna;
+  int alt = img1->linha, larg = img1->coluna;
 
   //a altura da img1 se transforma na largura da img2, e a largura se transforma em altura
   HeaderInvert(img1, img2);
@@ -459,7 +459,7 @@ Imagem *GirarPraDireita(Imagem *img1, Imagem *img2){
 Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2){
 
   //alt e larg recebem os valores da imagem
-  int alt = img->linha, larg = img->coluna;
+  int alt = img1->linha, larg = img1->coluna;
 
   //Cria a img2 com o mesmo tamanho da img1
   HeaderCopy(img1, img2);
@@ -489,7 +489,7 @@ Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2){
 Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2){
 
   //alt e larg recebem os valores da imagem
-  int alt = img->linha, larg = img->coluna;
+  int alt = img1->linha, larg = img1->coluna;
 
   //Cria a img2 com o mesmo tamanho da img1
   HeaderCopy(img1, img2);
@@ -519,7 +519,7 @@ Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2){
 Imagem *EspelharVertical(Imagem *img1, Imagem *img2){
 
   //alt e larg recebem os valores da imagem
-  int alt = img->linha, larg = img->coluna;
+  int alt = img1->linha, larg = img1->coluna;
 
   //Cria a img2 com o mesmo tamanho da img1
   HeaderCopy(img1, img2);

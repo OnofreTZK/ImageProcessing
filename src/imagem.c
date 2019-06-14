@@ -149,7 +149,7 @@ void CriarImagem(const char *nome_arquivo, Imagem *img){
 
 //Função para acessar os pixels da imagem para leitura e escrita.
 Pixel *PixelDaImagem(Imagem *img, int i, int j) {
-    return &(img->pixel[j * img->coluna + i]);
+    return (img->pixel[j * img->coluna + i]);
 }
 
 
