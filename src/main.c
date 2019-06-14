@@ -1,24 +1,5 @@
 #include "util.h"
 
-
-//Função para o usuário nomear o arquivo para cada operação.
-const char *getFilename(char *buffer, size_t bf_size) {
-    printf("\nInsira o nome do arquivo acrescentando '.ppm':\n\tEx: 'nome_arquivo.ppm'\n\n");
-
-    char *ch = fgets(buffer, bf_size, stdin);
-
-    for(int i = 0; i < bf_size; i++) {
-        if( *(buffer+i) != '\0' && *(ch+i) == '\n') {
-            *(buffer+i) = '\0'; //Substituição do '\n' pelo '\0'
-        }
-    }
-    return buffer;
-}
-
-
-
-
-
 int main(int argc, char const *argv[]){
   
  if(argc < 2){
@@ -32,6 +13,12 @@ int main(int argc, char const *argv[]){
 
 
     Imagem entrada; //variavel que irá armazenar a imagem.
+    Imagem Output;
+    Imagem Output2;
+    Imagem Output3;
+    Imagem Output4;
+    Imagem Output5;
+
 
 
     printf("#### PHOTOSHOP20 ####\n\n");
@@ -43,7 +30,10 @@ int main(int argc, char const *argv[]){
         printf("qual operação deseja fazer na imagem?\n");
         printf("$'cin'\t->\tConverte para escala cinza\n");
         printf("$'thr'\t->\tBinarização da imagem usando thresholding\n");
+        printf("$'brd'\t->\tDetectar bordas\n");
+        printf("$'sbl'\t->\tDetectar bordas com o operador de sobel\n");
         printf("$'blu'\t->\tExecuta blurring\n");
+        printf("$'gss'\t->\tExecuta blurring com filtro gaussiano\n");
         printf("$'sha'\t->\tExecuta sharpening\n");
         printf("$'rot'\t->\tRotaciona a imagem\n");
         printf("$'amp'\t->\tAmpliar a imagem\n");
@@ -62,18 +52,66 @@ int main(int argc, char const *argv[]){
             LerImagem(argv[1], &entrada);
             ImagemCinza(&entrada);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
+            LiberaMemoria(&entrada);
         }
         else if(strcmp(cmd, thr) == 0){
             LerImagem(argv[1], &entrada);
             ImagemCinza(&entrada);
             Segmentation(&entrada);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
+            LiberaMemoria(&entrada);
+        }
+        else if(strcmp(cmd, brd) == 0){
+            LerImagem(argv[1], &entrada);
+            ImagemCinza(&entrada);
+            Segmentation(&entrada);
+            Bordas(&entrada, &Output);
+            LiberaMemoria(&entrada);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output);
+            LiberaMemoria(&Output);     
+        }
+        else if(strcmp(cmd, sbl) == 0){
+            LerImagem(argv[1], &entrada);
+            ImagemCinza(&entrada);
+            Gauss(&entrada, &Output);
+            LiberaMemoria(&entrada);
+            Sobel(&Output, &Output2);
+            LiberaMemoria(&Output);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
+            LiberaMemoria(&Output2);       
         }
         else if(strcmp(cmd, blu) == 0){
             LerImagem(argv[1], &entrada);
+            Blur(&entrada, &Output);
+            LiberaMemoria(&entrada);
+            Blur(&Output, &Output2);
+            LiberaMemoria(&Output);
+            Blur(&Output2, &Output3);
+            LiberaMemoria(&Output2);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output3);
+            LiberaMemoria(&Output3);
+        }
+        else if(strcmp(cmd, gss) == 0){
+            LerImagem(argv[1], &entrada);
+            Gauss(&entrada, &Output);
+            LiberaMemoria(&entrada);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output); 
+            LiberaMemoria(&Output);  
         }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
+            Blur(&entrada, &Output);
+            LiberaMemoria(&entrada);
+            Blur(&Output, &Output2);
+            LiberaMemoria(&Output);
+            Blur(&Output2, &Output3);
+            LiberaMemoria(&Output2);
+            Sharpening(&Output3, &Output4);
+            LiberaMemoria(&Output3);
+            Sharpening(&Output4, &Output5);
+            LiberaMemoria(&Output4);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output5);
+            LiberaMemoria(&Output5);
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);

@@ -9,9 +9,21 @@ void AlocaMatriz(Imagem *img){
 
   img->pixel = (Pixel**) malloc(img->linha*sizeof(Pixel*));
   
-  for(int i = 0;i<img->linha;i++){
+  for(int i = 0; i < img->linha; i++){
     img->pixel[i] = (Pixel*) malloc(img->coluna*sizeof(Pixel));
   }
+}
+
+
+
+
+void LiberaMemoria(Imagem *img){
+  
+  for(i = 0;i < img->linha; i++){
+    free(img->pixel[i]);
+  }
+
+  free(img->pixel);
 }
 
 
@@ -20,7 +32,6 @@ void AlocaMatriz(Imagem *img){
 void LerImagem(const char *nome_arquivo, Imagem *img){
   
   char Head1[3] = "P3";
-  char Head2[2] = "P6";
 
   FILE *imagem_entrada = fopen(nome_arquivo, "r");
 
@@ -37,22 +48,56 @@ void LerImagem(const char *nome_arquivo, Imagem *img){
           exit(1);
         }
          else{
-            fscanf(imagem_entrada, "%d %d", &img->linha, &img->coluna);
+            fscanf(imagem_entrada, "%d %d", &img->coluna, &img->linha);
             fscanf(imagem_entrada, "%d", &img->max_value);
       
             AlocaMatriz(img);//Alocando espaço necessário para os pixels.
 
             for(i = 0;i<img->linha;i++){
               for(j = 0;j<img->coluna;j++){
-                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].r);
-                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].g);
-                fscanf(imagem_entrada, " %hd", &img->pixel[i][j].b);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].r);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].g);
+                fscanf(imagem_entrada, "%hd", &img->pixel[i][j].b);
               }
             }
           }
         }
     
     fclose(imagem_entrada);
+}
+
+
+
+
+void HeaderCopy(Imagem *img, Imagem *img2){
+
+    strcpy(img2->ID, img->ID);
+    img2->linha = img->linha;
+    img2->coluna = img->coluna;
+    img2->max_value = img->max_value;
+}
+
+
+
+
+//Função para o usuário nomear o arquivo para cada operação.
+const char *getFilename(char *buffer, size_t bf_size) {
+    printf("\nInsira o nome do arquivo:\n\t`->Não é necessário colocar '.ppm' o programa faz isso automaticamente.\n\n");
+  
+      char *ch = fgets(buffer, bf_size, stdin);
+
+      for(i = 0; i < bf_size; i++) {
+          if( *(buffer+i) != '\0' && *(ch+i) == '\n') {
+              *(buffer+i) = '\0'; //Substituição do '\n' pelo '\0'
+          }
+      }
+      
+      char valid[5] = ".ppm";
+
+      strcat(buffer, valid);
+
+      return buffer;
+    
 }
 
 
@@ -70,7 +115,7 @@ void CriarImagem(const char *nome_arquivo, Imagem *img){
   }
     else{
       fprintf(imagem_saida, "%s\n", img->ID);
-      fprintf(imagem_saida, "%d %d\n", img->linha, img->coluna);
+      fprintf(imagem_saida, "%d %d\n", img->coluna, img->linha);
       fprintf(imagem_saida, "%d\n", img->max_value);
 
        
