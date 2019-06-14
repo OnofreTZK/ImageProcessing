@@ -22,7 +22,13 @@ Imagem *Sharpening(Imagem *img, Imagem *img2);
 Imagem *Blur(Imagem *img, Imagem *img2);
 
 //Função para realizar a detecção de bordas
-Imagem *Bordas(Imagem *img, Imagem*img2);
+Imagem *Bordas(Imagem *img, Imagem *img2);
+
+//Função para aplicar o borrão de Gauss.
+Imagem *Gauss(Imagem *img, Imagem *img2);
+
+//Função para aplicar detecção de bordas com o operador de sobel.
+Imagem *Sobel(Imagem *img, Imagem *img2);
 
 #endif
 
