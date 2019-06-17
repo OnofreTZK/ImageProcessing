@@ -55,20 +55,20 @@ int main(int argc, char const *argv[]){
 
         if(strcmp(cmd, cin) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
             LiberaMemoria(&entrada);
         }
         else if(strcmp(cmd, thr) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             Segmentation(&entrada);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
             LiberaMemoria(&entrada);
         }
         else if(strcmp(cmd, brd) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             Segmentation(&entrada);
             Bordas(&entrada, &Output);
             LiberaMemoria(&entrada);
@@ -77,24 +77,20 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, sbl) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             Gauss(&entrada, &Output);
             LiberaMemoria(&entrada);
-            Sobel(&Output, &Output2);
+            Sobel(&Output, &Output2, 2);
             LiberaMemoria(&Output);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
             LiberaMemoria(&Output2);       
         }
         else if(strcmp(cmd, blu) == 0){
             LerImagem(argv[1], &entrada);
-            Blur(&entrada, &Output);
+            Blur(&entrada, &Output, 3);
             LiberaMemoria(&entrada);
-            Blur(&Output, &Output2);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output);
             LiberaMemoria(&Output);
-            Blur(&Output2, &Output3);
-            LiberaMemoria(&Output2);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &Output3);
-            LiberaMemoria(&Output3);
         }
         else if(strcmp(cmd, gss) == 0){
             LerImagem(argv[1], &entrada);
@@ -105,18 +101,12 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
-            Blur(&entrada, &Output);
+            Blur(&entrada, &Output, 3);
             LiberaMemoria(&entrada);
-            Blur(&Output, &Output2);
+            Sharpening(&Output, &Output2, 3);
             LiberaMemoria(&Output);
-            Blur(&Output2, &Output3);
-            LiberaMemoria(&Output2);
-            Sharpening(&Output3, &Output4);
-            LiberaMemoria(&Output3);
-            Sharpening(&Output4, &Output5);
-            LiberaMemoria(&Output4);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &Output5);
-            LiberaMemoria(&Output5);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
+            LiberaMemoria(&Output2); 
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);
