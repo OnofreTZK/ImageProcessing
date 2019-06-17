@@ -1,3 +1,4 @@
+    
 #ifndef imagem_h
 #define imagem_h
 
@@ -24,7 +25,13 @@ void CriarImagem(const char *nome_arquivo, Imagem *img);
 //Função para copiar o header de uma imagem para outra.
 void HeaderCopy(Imagem *img, Imagem *img2);
 
+//Função para inverter as linhas e colunas da imagem 1 para a 2.
+void HeaderInvert(Imagem *img, Imagem *img2);
+
 //Função para o usuário nomear um arquivo para cada operação.
 const char *getFilename(char *buffer, size_t bf_size);
+
+//Função para acessar os pixels da imagem para leitura e escrita.
+Pixel *PixelDaImagem(Imagem *img, int i, int j);
 
 #endif  

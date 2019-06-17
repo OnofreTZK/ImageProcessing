@@ -18,6 +18,10 @@ int main(int argc, char const *argv[]){
     Imagem Output3;
     Imagem Output4;
     Imagem Output5;
+    Imagem Output6;
+    Imagem Output7;
+    Imagem Output8;
+    Imagem Output9;
 
 
 
@@ -35,9 +39,10 @@ int main(int argc, char const *argv[]){
         printf("$'blu'\t->\tExecuta blurring\n");
         printf("$'gss'\t->\tExecuta blurring com filtro gaussiano\n");
         printf("$'sha'\t->\tExecuta sharpening\n");
-        printf("$'rot'\t->\tRotaciona a imagem\n");
+        printf("$'rot'\t->\tRotacionar a imagem\n");
         printf("$'amp'\t->\tAmpliar a imagem\n");
         printf("$'red'\t->\tReduzir a imagem\n");
+        printf("$'esp'\t->\tEspelhar a imagem\n");
         printf("$'exi' para sair\n");
         printf("\n");
 
@@ -50,20 +55,20 @@ int main(int argc, char const *argv[]){
 
         if(strcmp(cmd, cin) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
             LiberaMemoria(&entrada);
         }
         else if(strcmp(cmd, thr) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             Segmentation(&entrada);
             CriarImagem(getFilename(fname, FILENAME_MAX), &entrada);
             LiberaMemoria(&entrada);
         }
         else if(strcmp(cmd, brd) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             Segmentation(&entrada);
             Bordas(&entrada, &Output);
             LiberaMemoria(&entrada);
@@ -72,24 +77,20 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, sbl) == 0){
             LerImagem(argv[1], &entrada);
-            ImagemCinza(&entrada);
+            ImagemCinza(&entrada, 3);
             Gauss(&entrada, &Output);
             LiberaMemoria(&entrada);
-            Sobel(&Output, &Output2);
+            Sobel(&Output, &Output2, 2);
             LiberaMemoria(&Output);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
             LiberaMemoria(&Output2);       
         }
         else if(strcmp(cmd, blu) == 0){
             LerImagem(argv[1], &entrada);
-            Blur(&entrada, &Output);
+            Blur(&entrada, &Output, 3);
             LiberaMemoria(&entrada);
-            Blur(&Output, &Output2);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output);
             LiberaMemoria(&Output);
-            Blur(&Output2, &Output3);
-            LiberaMemoria(&Output2);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &Output3);
-            LiberaMemoria(&Output3);
         }
         else if(strcmp(cmd, gss) == 0){
             LerImagem(argv[1], &entrada);
@@ -100,27 +101,65 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, sha) == 0){
             LerImagem(argv[1], &entrada);
-            Blur(&entrada, &Output);
+            Blur(&entrada, &Output, 3);
             LiberaMemoria(&entrada);
-            Blur(&Output, &Output2);
+            Sharpening(&Output, &Output2, 3);
             LiberaMemoria(&Output);
-            Blur(&Output2, &Output3);
-            LiberaMemoria(&Output2);
-            Sharpening(&Output3, &Output4);
-            LiberaMemoria(&Output3);
-            Sharpening(&Output4, &Output5);
-            LiberaMemoria(&Output4);
-            CriarImagem(getFilename(fname, FILENAME_MAX), &Output5);
-            LiberaMemoria(&Output5);
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
+            LiberaMemoria(&Output2); 
         }
         else if(strcmp(cmd, rot) == 0){
             LerImagem(argv[1], &entrada);
+            
+            printf("\n");
+            printf("$'esq'\t->\tGirar 90º para a esquerda\n");
+            printf("$'dir'\t->\tGirar 90º para a direita\n");
+            printf("$'cto'\t->\tGirar 180º\n");
+            printf("\n");
+
+            scanf("%s", cmd);
+            getchar();
+
+            if(strcmp(cmd, esq) == 0){
+                GirarPraEsquerda(&entrada, &Output6);    
+            }
+            else if(strcmp(cmd, dir) == 0){
+                GirarPraDireita(&entrada, &Output6);
+            }
+            else if(strcmp(cmd, cto) == 0){
+                GirarCentoEOitenta(&entrada, &Output6);
+            }
+
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output6);
         }
         else if(strcmp(cmd, amp) == 0){
             LerImagem(argv[1], &entrada);
+            //AmpliarImagem(&entrada); ainda nao implementadas.
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output7);
         }
         else if(strcmp(cmd, red) == 0){
             LerImagem(argv[1], &entrada);
+            //ReduzirImagem(&entrada); ainda nao implementadas.
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output8);
+        }
+        else if(strcmp(cmd, esp) == 0){
+            LerImagem(argv[1], &entrada);
+
+            printf("$'hor'\t->\tEspelhar na horizontal\n");
+            printf("$'ver'\t->\tEspelhar na vertical\n");
+            printf("\n");
+
+            scanf("%s", cmd);
+            getchar();
+
+            if(strcmp(cmd, hor) == 0){
+                EspelharHorizontal(&entrada, &Output9);   
+            }
+            else if(strcmp(cmd, ver) == 0){
+                EspelharVertical(&entrada, &Output9);
+            }
+
+            CriarImagem(getFilename(fname, FILENAME_MAX), &Output9);
         }
         else if(strcmp(cmd, exi) == 0){
             printf("~~~~~~~~~~~~~~~~~~~~~~~\n");

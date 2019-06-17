@@ -21,19 +21,27 @@ int MediaPixel(Pixel **pixel, int i, int j){
 
 
 
-void ImagemCinza(Imagem *img){
+Imagem *ImagemCinza(Imagem *img, int count){
 
-    int opti; // otimizador para aplicar a escala cinza n vezes com o intuito de eliminar qualquer vestigio de cor.
 
-    for(opti = 0;opti<3;opti++){  
-        for(i = 0;i<img->linha;i++){
-            for(j = 0;j<img->coluna;j++){
-                img->pixel[i][j].r = MediaPixel(img->pixel, i, j);
-                img->pixel[i][j].g = MediaPixel(img->pixel, i, j);
-                img->pixel[i][j].b = MediaPixel(img->pixel, i, j);
-            }
-        }  
+      
+    for(i = 0;i<img->linha;i++){
+        for(j = 0;j<img->coluna;j++){
+            img->pixel[i][j].r = MediaPixel(img->pixel, i, j);
+            img->pixel[i][j].g = MediaPixel(img->pixel, i, j);
+            img->pixel[i][j].b = MediaPixel(img->pixel, i, j);
+        }
+    }  
+    
+
+
+    //Uma recursao simples com o intuito de eliminar qualquer vestigio de cor.
+    if(count > 1){
+        img = ImagemCinza(img, count - 1);
     }
+     
+    return img;
+
 }
 
 
@@ -85,7 +93,7 @@ void Segmentation(Imagem *img){
 
 
 
-Imagem *Sharpening(Imagem *img, Imagem *img2){
+Imagem *Sharpening(Imagem *img, Imagem *img2, int count){
     int filter[3][3] = {{0, -1, 0},
                         {-1, 5, -1},
                         {0, -1, 0}};
@@ -134,13 +142,17 @@ Imagem *Sharpening(Imagem *img, Imagem *img2){
         }
     }
 
+     if(count > 1){
+        img2 = Sharpening(img, img2, count - 1);
+      }
+
     return img2;
 }
 
 
 
 
-Imagem *Blur(Imagem *img, Imagem *img2){
+Imagem *Blur(Imagem *img, Imagem *img2, int count){
     float filter[3][3] = {{ 1, 1, 1},
                           { 1, 1, 1},
                           { 1, 1, 1}};
@@ -193,9 +205,14 @@ Imagem *Blur(Imagem *img, Imagem *img2){
                 img2->pixel[i][j].b = (unsigned short int) (aux_b);            
             }
         }
+
+      if(count > 1){
+        img = Blur(img, img2, count -1);
+      }
+      
         
     
-    return img2;
+    return img;
 
 
 }
@@ -337,7 +354,7 @@ Imagem *Gauss(Imagem *img, Imagem *img2){
 
 
 
-Imagem *Sobel(Imagem *img, Imagem *img2){
+Imagem *Sobel(Imagem *img, Imagem *img2, int count){
     float Sobel_X[3][3] = {{ -1, 0, 1},
                            {-2, 0, 2},
                            { -1, 0, 1}};
@@ -385,10 +402,161 @@ Imagem *Sobel(Imagem *img, Imagem *img2){
             }
         }
 
+      if(count > 1){
+        img2 = Sobel(img, img2, count - 1);
+      }
+
         
-    
+      return img2;
 
-    
-    return img2;
+}
 
+
+
+
+Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img2->linha, larg = img2->coluna;
+
+  //a altura da img1 se transforma na largura da img2, e a largura se transforma em altura
+  HeaderInvert(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, j, larg - i - 1);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *GirarPraDireita(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img1->linha, larg = img1->coluna;
+
+  //a altura da img1 se transforma na largura da img2, e a largura se transforma em altura
+  HeaderInvert(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, alt - j - 1, i);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img1->linha, larg = img1->coluna;
+
+  //Cria a img2 com o mesmo tamanho da img1
+  HeaderCopy(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, larg - i - 1, alt - j - 1);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img1->linha, larg = img1->coluna;
+
+  //Cria a img2 com o mesmo tamanho da img1
+  HeaderCopy(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, larg - i - 1, j);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
+}
+
+
+
+
+Imagem *EspelharVertical(Imagem *img1, Imagem *img2){
+
+  //alt e larg recebem os valores da imagem
+  int alt = img1->linha, larg = img1->coluna;
+
+  //Cria a img2 com o mesmo tamanho da img1
+  HeaderCopy(img1, img2);
+
+  AlocaMatriz(img2);
+
+  for (j = 0; j < alt; j++){
+    for (i = 0; i < larg; i++){
+
+      //Acessa o pixel [i][j] de cada matriz
+      Pixel *pix1 = PixelDaImagem(img1, i, j);
+      Pixel *pix2 = PixelDaImagem(img2, i, alt - j - 1);
+
+      //Invertendo a matriz de fato
+      pix2->r = pix1->r;
+      pix2->g = pix1->g;
+      pix2->b = pix1->b;
+    }
+  }
+  
+  return img2;
 }

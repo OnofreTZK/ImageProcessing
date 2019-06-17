@@ -13,7 +13,13 @@ char sha[4] = "sha";
 char rot[4] = "rot";
 char amp[4] = "amp";
 char red[4] = "red";
+char esq[4] = "esq";
+char dir[4] = "dir";
+char cto[4] = "cto";
+char esp[4] = "esp";
+char hor[4] = "hor";
+char ver[4] = "ver";
 char exi[4] = "exi";
 
 
-#endif  
+#endif 
