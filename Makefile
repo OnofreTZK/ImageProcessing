@@ -1,4 +1,4 @@
-# Makefile do projeto de processamento de imagem - ITP 2019.1
+# Makefile do projeto de processamento de imagem - ITP 2019.1   
 
 # pastas do projeto
 SRCDIR = ./src
