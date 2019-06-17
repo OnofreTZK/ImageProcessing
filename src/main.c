@@ -3,7 +3,7 @@
 int main(int argc, char const *argv[]){
   
  if(argc < 2){
-   printf("Nenhuma imagem está sendo utilidada no programa, execute-o passando como parâmetro\n");
+   printf("Nenhuma imagem está sendo utilizada no programa, execute-o passando como parâmetro\n");
    printf("\tEx: ./<nome executavel> <nome_arquivo.ppm>\n");
 }
  else{
