@@ -79,13 +79,35 @@ void HeaderCopy(Imagem *img, Imagem *img2){
 
 
 
-//Inverte as linhas e colunas da imagem 1
+
 void HeaderInvert(Imagem *img, Imagem *img2){
 
     strcpy(img2->ID, img->ID);
     img2->linha = img->coluna;
     img2->coluna = img->linha;
     img2->max_value = img->max_value;
+}
+
+
+
+
+void HeaderEnlarge(Imagem *img, Imagem *img2, int n) {
+
+  strcpy(img2->ID, img->ID);
+  img2->linha = img->linha*n;
+  img2->coluna = img->coluna*n;
+  img2->max_value = img->max_value;
+}
+
+
+
+
+void HeaderReduce(Imagem *img, Imagem *img2) {
+
+  strcpy(img2->ID, img->ID);
+  img2->linha = img->linha/2;
+  img2->coluna = img->coluna/2;
+  img2->max_value = img->max_value;
 }
 
 
@@ -144,14 +166,6 @@ void CriarImagem(const char *nome_arquivo, Imagem *img){
 
     fclose(imagem_saida);
 }
-
-
-
-//Função para acessar os pixels da imagem para leitura e escrita.
-Pixel *PixelDaImagem(Imagem *img, int i, int j) {
-    return (img->pixel[j * img->coluna + i]);
-}
-
 
 
 

@@ -414,7 +414,7 @@ Imagem *Sobel(Imagem *img, Imagem *img2, int count){
 
 
 
-Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2){
+Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2) {
 
   //alt e larg recebem os valores da imagem
   int alt = img2->linha, larg = img2->coluna;
@@ -424,17 +424,13 @@ Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2){
 
   AlocaMatriz(img2);
 
-  for (j = 0; j < alt; j++){
-    for (i = 0; i < larg; i++){
+  //preenche coluna por coluna
+  for (j = 0; j < alt; j++) {
+    for (i = 0; i < larg; i++) {
 
-      //Acessa o pixel [i][j] de cada matriz
-      Pixel *pix1 = PixelDaImagem(img1, i, j);
-      Pixel *pix2 = PixelDaImagem(img2, j, larg - i - 1);
-
-      //Invertendo a matriz de fato
-      pix2->r = pix1->r;
-      pix2->g = pix1->g;
-      pix2->b = pix1->b;
+      img2->pixel[j][larg - i - 1].r = img1->pixel[i][j].r;
+      img2->pixel[j][larg - i - 1].g = img1->pixel[i][j].g;
+      img2->pixel[j][larg - i - 1].b = img1->pixel[i][j].b;
     }
   }
   
@@ -444,7 +440,7 @@ Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2){
 
 
 
-Imagem *GirarPraDireita(Imagem *img1, Imagem *img2){
+Imagem *GirarPraDireita(Imagem *img1, Imagem *img2) {
 
   //alt e larg recebem os valores da imagem
   int alt = img1->linha, larg = img1->coluna;
@@ -454,17 +450,13 @@ Imagem *GirarPraDireita(Imagem *img1, Imagem *img2){
 
   AlocaMatriz(img2);
 
-  for (j = 0; j < alt; j++){
-    for (i = 0; i < larg; i++){
+  //preenche coluna por coluna
+  for (j = 0; j < alt; j++) {
+    for (i = 0; i < larg; i++) {
 
-      //Acessa o pixel [i][j] de cada matriz
-      Pixel *pix1 = PixelDaImagem(img1, i, j);
-      Pixel *pix2 = PixelDaImagem(img2, alt - j - 1, i);
-
-      //Invertendo a matriz de fato
-      pix2->r = pix1->r;
-      pix2->g = pix1->g;
-      pix2->b = pix1->b;
+      img2->pixel[alt - j - 1][i].r = img1->pixel[i][j].r;
+      img2->pixel[alt - j - 1][i].g = img1->pixel[i][j].g;
+      img2->pixel[alt - j - 1][i].b = img1->pixel[i][j].b;
     }
   }
   
@@ -474,7 +466,7 @@ Imagem *GirarPraDireita(Imagem *img1, Imagem *img2){
 
 
 
-Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2){
+Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2) {
 
   //alt e larg recebem os valores da imagem
   int alt = img1->linha, larg = img1->coluna;
@@ -484,17 +476,12 @@ Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2){
 
   AlocaMatriz(img2);
 
-  for (j = 0; j < alt; j++){
-    for (i = 0; i < larg; i++){
+  for (j = 0; j < alt; j++) {
+    for (i = 0; i < larg; i++) {
 
-      //Acessa o pixel [i][j] de cada matriz
-      Pixel *pix1 = PixelDaImagem(img1, i, j);
-      Pixel *pix2 = PixelDaImagem(img2, larg - i - 1, alt - j - 1);
-
-      //Invertendo a matriz de fato
-      pix2->r = pix1->r;
-      pix2->g = pix1->g;
-      pix2->b = pix1->b;
+      img2->pixel[larg - i - 1][alt - j - 1].r = img1->pixel[i][j].r;
+      img2->pixel[larg - i - 1][alt - j - 1].g = img1->pixel[i][j].g;
+      img2->pixel[larg - i - 1][alt - j - 1].b = img1->pixel[i][j].b;
     }
   }
   
@@ -504,7 +491,7 @@ Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2){
 
 
 
-Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2){
+Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2) {
 
   //alt e larg recebem os valores da imagem
   int alt = img1->linha, larg = img1->coluna;
@@ -514,17 +501,12 @@ Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2){
 
   AlocaMatriz(img2);
 
-  for (j = 0; j < alt; j++){
-    for (i = 0; i < larg; i++){
+  for (j = 0; j < alt; j++) {
+    for (i = 0; i < larg; i++) {
 
-      //Acessa o pixel [i][j] de cada matriz
-      Pixel *pix1 = PixelDaImagem(img1, i, j);
-      Pixel *pix2 = PixelDaImagem(img2, larg - i - 1, j);
-
-      //Invertendo a matriz de fato
-      pix2->r = pix1->r;
-      pix2->g = pix1->g;
-      pix2->b = pix1->b;
+      img2->pixel[larg - i - 1][j].r = img1->pixel[i][j].r;
+      img2->pixel[larg - i - 1][j].g = img1->pixel[i][j].g;
+      img2->pixel[larg - i - 1][j].b = img1->pixel[i][j].b;
     }
   }
   
@@ -534,7 +516,7 @@ Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2){
 
 
 
-Imagem *EspelharVertical(Imagem *img1, Imagem *img2){
+Imagem *EspelharVertical(Imagem *img1, Imagem *img2) {
 
   //alt e larg recebem os valores da imagem
   int alt = img1->linha, larg = img1->coluna;
@@ -544,19 +526,72 @@ Imagem *EspelharVertical(Imagem *img1, Imagem *img2){
 
   AlocaMatriz(img2);
 
-  for (j = 0; j < alt; j++){
-    for (i = 0; i < larg; i++){
+  for (j = 0; j < alt; j++) {
+    for (i = 0; i < larg; i++) {
 
-      //Acessa o pixel [i][j] de cada matriz
-      Pixel *pix1 = PixelDaImagem(img1, i, j);
-      Pixel *pix2 = PixelDaImagem(img2, i, alt - j - 1);
-
-      //Invertendo a matriz de fato
-      pix2->r = pix1->r;
-      pix2->g = pix1->g;
-      pix2->b = pix1->b;
+      img2->pixel[i][alt - j - 1].r = img1->pixel[i][j].r;
+      img2->pixel[i][alt - j - 1].g = img1->pixel[i][j].g;
+      img2->pixel[i][alt - j - 1].b = img1->pixel[i][j].b;
     }
   }
   
+  return img2;
+}
+
+
+
+
+Imagem *AmpliarImagem(Imagem *img1, Imagem *img2, int n) {
+
+  HeaderEnlarge(img1, img2, n);
+
+  AlocaMatriz(img2);
+
+  int altura1 = img1->linha, largura1 = img1->coluna;
+  int altura2 = img2->linha, largura2 = img2->coluna;
+
+  for (i = 0, k = 0; i < altura1 && k < altura2; k++) {
+
+    if (k % n == 0 && k != 0) {
+      i++;
+    }
+
+    for (j = 0, l = 0; j < largura1 && l < largura2; l++) {
+      
+      if (l % n == 0 && l != 0) {
+        j++;
+      }
+
+      img2->pixel[k][l] = img1->pixel[i][j];
+    }
+  }
+
+  return img2;
+}
+
+
+
+
+Imagem *ReduzirImagem(Imagem *img1, Imagem *img2) {
+
+  HeaderReduce(img1, img2);
+
+  AlocaMatriz(img2);
+
+  int altura1 = img1->linha, largura1 = img1->coluna;
+  int altura2 = img2->linha, largura2 = img2->coluna;
+
+  for (i = 0, k = 1; i < altura2 && k < altura1; i++, k += 2) {
+    for (j = 0, l = 1; j < largura2 && l < largura1; j++, l += 2) {
+
+      img2->pixel[i][j].r = (img1->pixel[k - 1][l - 1].r + img1->pixel[k - 1][l].r + img1->pixel[k][l - 1].r + img1->pixel[k][l].r) / 4;
+
+      img2->pixel[i][j].g = (img1->pixel[k - 1][l - 1].g + img1->pixel[k - 1][l].g + img1->pixel[k][l - 1].g + img1->pixel[k][l].g) / 4;;
+
+      img2->pixel[i][j].b = (img1->pixel[k - 1][l - 1].b + img1->pixel[k - 1][l].b + img1->pixel[k][l - 1].b + img1->pixel[k][l].b) / 4;
+      
+    }
+  }
+
   return img2;
 }

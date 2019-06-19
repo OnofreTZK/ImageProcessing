@@ -134,12 +134,12 @@ int main(int argc, char const *argv[]){
         }
         else if(strcmp(cmd, amp) == 0){
             LerImagem(argv[1], &entrada);
-            //AmpliarImagem(&entrada); ainda nao implementadas.
+            AmpliarImagem(&entrada, &Output7, 2);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output7);
         }
         else if(strcmp(cmd, red) == 0){
             LerImagem(argv[1], &entrada);
-            //ReduzirImagem(&entrada); ainda nao implementadas.
+            ReduzirImagem(&entrada, &Output8);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output8);
         }
         else if(strcmp(cmd, esp) == 0){
