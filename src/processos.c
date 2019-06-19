@@ -417,7 +417,7 @@ Imagem *Sobel(Imagem *img, Imagem *img2, int count){
 Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2) {
 
   //alt e larg recebem os valores da imagem
-  int alt = img2->linha, larg = img2->coluna;
+  int alt = img1->linha, larg = img1->coluna;
 
   //a altura da img1 se transforma na largura da img2, e a largura se transforma em altura
   HeaderInvert(img1, img2);
@@ -427,10 +427,7 @@ Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2) {
   //preenche coluna por coluna
   for (j = 0; j < alt; j++) {
     for (i = 0; i < larg; i++) {
-
-      img2->pixel[j][larg - i - 1].r = img1->pixel[i][j].r;
-      img2->pixel[j][larg - i - 1].g = img1->pixel[i][j].g;
-      img2->pixel[j][larg - i - 1].b = img1->pixel[i][j].b;
+      img2->pixel[i][j] = img1->pixel[j][larg - i - 1];
     }
   }
   
@@ -438,7 +435,7 @@ Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2) {
 }
 
 
-
+  
 
 Imagem *GirarPraDireita(Imagem *img1, Imagem *img2) {
 
@@ -454,9 +451,8 @@ Imagem *GirarPraDireita(Imagem *img1, Imagem *img2) {
   for (j = 0; j < alt; j++) {
     for (i = 0; i < larg; i++) {
 
-      img2->pixel[alt - j - 1][i].r = img1->pixel[i][j].r;
-      img2->pixel[alt - j - 1][i].g = img1->pixel[i][j].g;
-      img2->pixel[alt - j - 1][i].b = img1->pixel[i][j].b;
+      //alt - j - 1
+      img2->pixel[i][j] = img1->pixel[alt - j - 1][i];
     }
   }
   
@@ -469,19 +465,19 @@ Imagem *GirarPraDireita(Imagem *img1, Imagem *img2) {
 Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2) {
 
   //alt e larg recebem os valores da imagem
-  int alt = img1->linha, larg = img1->coluna;
+  //int alt = img1->linha, larg = img1->coluna;
 
   //Cria a img2 com o mesmo tamanho da img1
   HeaderCopy(img1, img2);
 
   AlocaMatriz(img2);
 
+  int alt = img1->linha, larg = img1->coluna;
+
   for (j = 0; j < alt; j++) {
     for (i = 0; i < larg; i++) {
 
-      img2->pixel[larg - i - 1][alt - j - 1].r = img1->pixel[i][j].r;
-      img2->pixel[larg - i - 1][alt - j - 1].g = img1->pixel[i][j].g;
-      img2->pixel[larg - i - 1][alt - j - 1].b = img1->pixel[i][j].b;
+      img2->pixel[i][j] = img1->pixel[larg - i - 1][alt - j - 1];
     }
   }
   

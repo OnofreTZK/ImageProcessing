@@ -131,16 +131,19 @@ int main(int argc, char const *argv[]){
             }
 
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output6);
+            LiberaMemoria(&Output6);
         }
         else if(strcmp(cmd, amp) == 0){
             LerImagem(argv[1], &entrada);
             AmpliarImagem(&entrada, &Output7, 2);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output7);
+            LiberaMemoria(&Output7);
         }
         else if(strcmp(cmd, red) == 0){
             LerImagem(argv[1], &entrada);
             ReduzirImagem(&entrada, &Output8);
             CriarImagem(getFilename(fname, FILENAME_MAX), &Output8);
+            LiberaMemoria(&Output8);
         }
         else if(strcmp(cmd, esp) == 0){
             LerImagem(argv[1], &entrada);

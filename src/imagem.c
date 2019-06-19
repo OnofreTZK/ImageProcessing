@@ -83,8 +83,8 @@ void HeaderCopy(Imagem *img, Imagem *img2){
 void HeaderInvert(Imagem *img, Imagem *img2){
 
     strcpy(img2->ID, img->ID);
-    img2->linha = img->coluna;
     img2->coluna = img->linha;
+    img2->linha = img->coluna;
     img2->max_value = img->max_value;
 }
 
