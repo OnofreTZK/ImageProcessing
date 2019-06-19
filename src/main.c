@@ -15,9 +15,6 @@ int main(int argc, char const *argv[]){
     Imagem entrada; //variavel que irá armazenar a imagem.
     Imagem Output;
     Imagem Output2;
-    Imagem Output3;
-    Imagem Output4;
-    Imagem Output5;
     Imagem Output6;
     Imagem Output7;
     Imagem Output8;

@@ -474,10 +474,12 @@ Imagem *GirarCentoEOitenta(Imagem *img1, Imagem *img2) {
 
   int alt = img1->linha, larg = img1->coluna;
 
-  for (j = 0; j < alt; j++) {
-    for (i = 0; i < larg; i++) {
+  for (i = 0; i < alt; i++) {
+    for (j = 0; j < larg; j++) {
 
-      img2->pixel[i][j] = img1->pixel[larg - i - 1][alt - j - 1];
+      img2->pixel[i][j].r = img1->pixel[alt-i-1][larg-j-1].r;
+      img2->pixel[i][j].g = img1->pixel[alt-i-1][larg-j-1].g;
+      img2->pixel[i][j].b = img1->pixel[alt-i-1][larg-j-1].b;
     }
   }
   
