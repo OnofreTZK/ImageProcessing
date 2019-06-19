@@ -46,4 +46,10 @@ Imagem *EspelharHorizontal(Imagem *img1, Imagem *img2);
 //Função para espelhar a imagem na vertical.
 Imagem *EspelharVertical(Imagem *img1, Imagem *img2);
 
+//Função para ampliar a imagem.
+Imagem *AmpliarImagem(Imagem *img1, Imagem *img2, int n);
+
+//Função para reduzir a imagem.
+Imagem *ReduzirImagem(Imagem *img1, Imagem *img2);
+
 #endif
