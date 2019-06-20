@@ -64,7 +64,7 @@ Binários excluidos com sucesso!
 ```
 ##### Para executar:
 ```bash
-./proj imagem.ppm
+$ ./proj imagem.ppm
 ```
 sendo `./proj` o nome do executável e `imagem.ppm` obrigatoriamente uma imagem do tipo `.ppm`, caso não tenha, esse repositório conta com duas: `got.ppm` e `ts.ppm`
 
