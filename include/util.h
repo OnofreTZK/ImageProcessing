@@ -3,6 +3,7 @@
 
 #include "processos.h"
 
+//Strings que serão usadas para validar o comando do usuário de acordo com o processo que ele escolher
 char cin[4] = "cin";
 char thr[4] = "thr";
 char brd[4] = "brd";
