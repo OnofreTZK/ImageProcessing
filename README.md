@@ -6,19 +6,19 @@
 * [Vitoria Deon](https://github.com/vickydeon)
 
 ### Funcionalidades obrigatórias
+   Funcionalidade | Status
+   ------------ | -------------
+   Ler e criar Imagem | Completo
+   Menu de Comandos | Completo
+   Escala de cinza | Completo
+   Arquivos diferentes para cada processo | Completo
+   Binarização | Completo
+   Rotacionar  | Completo 
+   Ampliar | Completo
+   Reduzir | Completo
+   Filtros | Completo
+   Detecção de bordas | Completo
 
-    Funcionalidade | Status
-    ------------ | -------------
-    Ler e criar Imagem | Completo
-    Menu de Comandos | Completo
-    Escala de cinza | Completo
-    Arquivos diferentes para cada processo | Completo
-    Binarização | Completo
-    Rotacionar  | Completo 
-    Ampliar | Completo
-    Reduzir | Completo
-    Filtros | Completo
-    Detecção de bordas | Completo
 
 ### Extras implementados
 
