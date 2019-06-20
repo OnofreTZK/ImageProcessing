@@ -1,6 +1,6 @@
 # Projeto de processamento de imagem - ITP 2019.1
 
-### Desenvolvido por:
+## Desenvolvido por:
 
 * [Tiago Onofre Araujo](https://github.com/OnofreTZK)
 * [Vitoria Deon](https://github.com/vickydeon)
@@ -38,3 +38,12 @@
     * Recursividades mais complexas
     * Interface gráfica
     * Verificar se a imagem foi nula
+
+### Compilação
+- Para baixar o código na sua maquina:
+    '''bash
+      `git clone` https://github.com/OnofreTZK/ITP_photoshop.git
+      '''
+- Após baixar o repositório, vá até a pasta raiz e:
+      '''bash
+      
