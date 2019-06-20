@@ -29,6 +29,6 @@ Detecção de bordas | Completo
 
 ### O que poderia ter sido feito diferente
 
-> A execução do programa com mais de uma imagem passada como parâmetro
-> Dar escolha ao usuário de qual imagem usar
-> Usar uma imagem ja processada em outro processo sem a necessidade de executar o programa novamente
+* A execução do programa com mais de uma imagem passada como parâmetro
+* Dar escolha ao usuário de qual imagem usar
+* Usar uma imagem ja processada em outro processo sem a necessidade de executar o programa novamente
