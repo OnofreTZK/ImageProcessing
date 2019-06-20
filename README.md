@@ -41,15 +41,23 @@
 
 ### Compilação
 ##### Para baixar o código na sua maquina:
-      `git clone` https://github.com/OnofreTZK/ITP_photoshop.git
-   
+```bash
+$ git clone https://github.com/OnofreTZK/ITP_photoshop.git
+```   
 ##### Após baixar o repositório, vá até a pasta raiz e:
 ```bash
-#digite 'make all' para compilar
+# Digite 'make all' para compilar
 $ make all
+# As seguintes mensagens devem aparecer:
+
+gcc ./src/*.c -Wall -lm -I ./include -o ./bin/proj
+proj -> ./bin/proj
+Compilado com sucesso! Para executar digite ./proj imagem.ppm
       
-#quando finalizar a execução digite 'make clean' para limpar os arquivo binários
+# Quando finalizar a execução digite 'make clean' para limpar os arquivo binários
 $ make clean
+# A seguinte mensagem deve aparecer:
+Binários excluidos com sucesso!
 ```
       
       
