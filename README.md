@@ -44,12 +44,12 @@
       `git clone` https://github.com/OnofreTZK/ITP_photoshop.git
    
 ##### Após baixar o repositório, vá até a pasta raiz e:
-    ```bash
-         #digite 'make all' para compilar
-         $ make all
+```bash
+#digite 'make all' para compilar
+$ make all
       
-         #quando finalizar a execução digite 'make clean' para limpar os arquivo binários
-         $ make clean
-     ```
+#quando finalizar a execução digite 'make clean' para limpar os arquivo binários
+$ make clean
+```
       
       
