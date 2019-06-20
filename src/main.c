@@ -49,6 +49,7 @@ int main(int argc, char const *argv[]){
 		
 		char fname[FILENAME_MAX];//Nome do arquivo que sera processado na func getFilename(). 
 		
+		// A Liberação de memória é feita sempre que uma variável(Imagem) não for mais necessária
 
 		if(strcmp(cmd, cin) == 0){
 			LerImagem(argv[1], &entrada);
@@ -126,19 +127,22 @@ int main(int argc, char const *argv[]){
 			else if(strcmp(cmd, cto) == 0){
 				GirarCentoEOitenta(&entrada, &Output6);
 			}
-
+            
+            LiberaMemoria(&entrada);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output6);
 			LiberaMemoria(&Output6);
 		}
 		else if(strcmp(cmd, amp) == 0){
 			LerImagem(argv[1], &entrada);
 			AmpliarImagem(&entrada, &Output7, 2);
+			LiberaMemoria(&entrada);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output7);
 			LiberaMemoria(&Output7);
 		}
 		else if(strcmp(cmd, red) == 0){
 			LerImagem(argv[1], &entrada);
 			ReduzirImagem(&entrada, &Output8);
+			LiberaMemoria(&entrada);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output8);
 			LiberaMemoria(&Output8);
 		}
@@ -148,7 +152,7 @@ int main(int argc, char const *argv[]){
 			printf("$'hor'\t->\tEspelhar na horizontal\n");
 			printf("$'ver'\t->\tEspelhar na vertical\n");
 			printf("\n");
-			
+
 			scanf("%s", cmd);
 			getchar();
 
@@ -159,7 +163,9 @@ int main(int argc, char const *argv[]){
 				EspelharVertical(&entrada, &Output9);
 			}
 
+            LiberaMemoria(&entrada);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output9);
+			LiberaMemoria(&Output9);
 		}
 		else if(strcmp(cmd, exi) == 0){
 			printf("~~~~~~~~~~~~~~~~~~~~~~~\n");

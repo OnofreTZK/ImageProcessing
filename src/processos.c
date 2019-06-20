@@ -24,7 +24,7 @@
     Imagem *ImagemCinza(Imagem *img, int count){
 
 
-    	
+
     	for(i = 0;i<img->linha;i++){
     		for(j = 0;j<img->coluna;j++){
     			img->pixel[i][j].r = MediaPixel(img->pixel, i, j);
@@ -32,14 +32,14 @@
     			img->pixel[i][j].b = MediaPixel(img->pixel, i, j);
     		}
     	}  
-    	
+
 
 
         //Uma recursao simples com o intuito de eliminar qualquer vestigio de cor.
     	if(count > 1){
     		img = ImagemCinza(img, count - 1);
     	}
-    	
+
     	return img;
 
     }
@@ -67,7 +67,7 @@
     void Segmentation(Imagem *img){
 
     	int v_limiar;
-    	
+
         v_limiar = Limiar(img, img->linha, img->coluna);// a melhor binarização é feita fazendo a media dos pixels da matriz.
 
         printf("\n\tlimiar calculado = %d\n", v_limiar);   
@@ -107,10 +107,11 @@
     			int aux_r = 0, aux_g = 0, aux_b = 0;
     			for(k = 0; k<3; k++){
     				for(l = 0; l<3; l++){
+    					//Condição para ignorar os elementos do kernel que ultrapassam as bordas
     					if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 == img->linha || j+l-1 == img->coluna){
     						continue; 
     					}
-    					
+
     					aux_r += (img->pixel[i-1+k][j-1+l].r) * filter[k][l];
     					aux_g += (img->pixel[i-1+k][j-1+l].g) * filter[k][l];
     					aux_b += (img->pixel[i-1+k][j-1+l].b) * filter[k][l];
@@ -157,30 +158,30 @@
     	{ 1, 1, 1},
     	{ 1, 1, 1}};
 
-    	
+
     	int aux_r, aux_g, aux_b;
-    	
+
     	HeaderCopy(img, img2);
-    	
+
     	AlocaMatriz(img2);
-    	
+
     	for(i = 0; i < img->linha; i++){
     		for(j = 0; j < img->coluna; j++){
     			aux_r = 0, aux_g = 0, aux_b = 0;
     			for(k = 0; k<3; k++){
     				for(l = 0; l<3; l++){
-    					
+
     					if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
     						continue; 
     					}
-    					
+
     					aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l])/9;
     					aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l])/9;
     					aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l])/9;
-    					
+
     				}
     			}
-    			
+
     			if(aux_r > 255){
     				aux_r = 255;
     			}
@@ -199,7 +200,7 @@
     			if(aux_b < 0){
     				aux_b = 0;
     			} 
-    			
+
     			img2->pixel[i][j].r = (unsigned short int) (aux_r);
     			img2->pixel[i][j].g = (unsigned short int) (aux_g);
     			img2->pixel[i][j].b = (unsigned short int) (aux_b);            
@@ -209,9 +210,9 @@
     	if(count > 1){
     		img = Blur(img, img2, count -1);
     	}
-    	
-    	
-    	
+
+
+
     	return img;
 
 
@@ -225,28 +226,28 @@
     	{ -1, 8, -1},
     	{ -1, -1, -1}};
 
-    	
+
     	int aux_r, aux_g, aux_b;
-    	
+
     	HeaderCopy(img, img2);
-    	
+
     	AlocaMatriz(img2);
-    	
-    	
+
+
     	for(i = 0; i < img->linha; i++){
     		for(j = 0; j < img->coluna; j++){
     			aux_r = 0, aux_g = 0, aux_b = 0;
     			for(k = 0; k<3; k++){
     				for(l = 0; l<3; l++){
-    					
+
     					if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
     						continue; 
     					}
-    					
+
     					aux_r = aux_r + ((img->pixel[i-1+k][j-1+l].r) * filter[k][l]);
     					aux_g = aux_g + ((img->pixel[i-1+k][j-1+l].g) * filter[k][l]);
     					aux_b = aux_b + ((img->pixel[i-1+k][j-1+l].b) * filter[k][l]);
-    					
+
     				}
     			}
 
@@ -268,17 +269,17 @@
     			if(aux_b < 0){
     				aux_b = 0;
     			} 
-    			
+
     			img2->pixel[i][j].r = (unsigned short int) (aux_r);
     			img2->pixel[i][j].g = (unsigned short int) (aux_g);
     			img2->pixel[i][j].b = (unsigned short int) (aux_b);            
     		}
     	}
 
-    	
-    	
 
-    	
+
+
+
     	return img2;
 
     }
@@ -293,28 +294,28 @@
     	{4, 16, 24, 16, 4},
     	{1, 4, 6, 4, 1}};
 
-    	
+
     	int aux_r, aux_g, aux_b;
-    	
+
     	HeaderCopy(img, img2);
-    	
+
     	AlocaMatriz(img2);
-    	
+
 
     	for(i = 0; i < img->linha; i++){
     		for(j = 0; j < img->coluna; j++){
     			aux_r = 0, aux_g = 0, aux_b = 0;
     			for(k = 0; k<5; k++){
     				for(l = 0; l<5; l++){
-    					
+
     					if( i+k-2 < 0 || j+l-2 < 0 || i+k-2 >= img->linha || j+l-2 >= img->coluna){
     						continue; 
     					}
-    					
+
     					aux_r = aux_r + ((img->pixel[i-2+k][j-2+l].r) * filter[k][l])/256;
     					aux_g = aux_g + ((img->pixel[i-2+k][j-2+l].g) * filter[k][l])/256;
     					aux_b = aux_b + ((img->pixel[i-2+k][j-2+l].b) * filter[k][l])/256;
-    					
+
     				}
     			}
 
@@ -336,17 +337,17 @@
     			if(aux_b < 0){
     				aux_b = 0;
     			} 
-    			
+
     			img2->pixel[i][j].r = (unsigned short int) (aux_r);
     			img2->pixel[i][j].g = (unsigned short int) (aux_g);
     			img2->pixel[i][j].b = (unsigned short int) (aux_b);            
     		}
     	}
-    	
-    	
-    	
 
-    	
+
+
+
+
     	return img2;
 
     }
@@ -361,31 +362,34 @@
 
     	float Sobel_Y[3][3] = {{-1, -2, -1},
     	{0, 0, 0},
-    	{1, 2, 1}};                     
+    	{1, 2, 1}};  
 
-    	
+    	/* O Operador de Sobel consiste em aplicar dois filtros de convolução(Horizontal e vertical) e aplicar no
+    	pixel central uma formula matematica explicada na documentação */                   
+
+
     	int aux_X, aux_Y;
-    	
+
     	HeaderCopy(img, img2);
-    	
+
     	AlocaMatriz(img2);
-    	
-    	
+
+
     	for(i = 0; i < img->linha; i++){
     		for(j = 0; j < img->coluna; j++){
     			aux_X = 0;
     			aux_Y = 0;
     			for(k = 0; k<3; k++){
     				for(l = 0; l<3; l++){
-    					
+
     					if( i+k-1 == -1 || j+l-1 == -1 || i+k-1 >= img->linha || j+l-1 >= img->coluna){
     						continue; 
     					}
-    					
+
     					aux_X = aux_X + ((img->pixel[i-1+k][j-1+l].r) * Sobel_X[k][l]);
     					aux_Y = aux_Y + ((img->pixel[i-1+k][j-1+l].r) * Sobel_Y[k][l]);
-    					
-    					
+
+
     				}
     			}
 
@@ -406,7 +410,7 @@
     		img2 = Sobel(img, img2, count - 1);
     	}
 
-    	
+
     	return img2;
 
     }
@@ -430,7 +434,7 @@
     			img2->pixel[i][j] = img1->pixel[j][larg - i - 1];
     		}
     	}
-    	
+
     	return img2;
     }
 
@@ -455,7 +459,7 @@
     			img2->pixel[i][j] = img1->pixel[alt - j - 1][i];
     		}
     	}
-    	
+
     	return img2;
     }
 
@@ -468,7 +472,7 @@
     	HeaderCopy(img1, img2);
 
     	AlocaMatriz(img2);
-    	
+
         //alt e larg recebem os valores da imagem
     	int alt = img1->linha, larg = img1->coluna;
 
@@ -480,7 +484,7 @@
     			img2->pixel[i][j].b = img1->pixel[alt-i-1][larg-j-1].b;
     		}
     	}
-    	
+
     	return img2;
     }
 
@@ -534,7 +538,9 @@
     	return img2;
     }
 
-
+    /* As funções de ampliar e reduzir consistem em fazer a media dos pixels que serão representados em um só,
+    esses valores podem variar de acordo com o zoom(neste projeto, infelizmente, não implementamos uma função para
+    pegar o valor do zoom com o usuário*/
 
 
     Imagem *AmpliarImagem(Imagem *img1, Imagem *img2, int n) {
@@ -553,7 +559,7 @@
     		}
 
     		for (j = 0, l = 0; j < largura1 && l < largura2; l++) {
-    			
+
     			if (l % n == 0 && l != 0) {
     				j++;
     			}
@@ -582,10 +588,10 @@
 
     			img2->pixel[i][j].r = (img1->pixel[k - 1][l - 1].r + img1->pixel[k - 1][l].r + img1->pixel[k][l - 1].r + img1->pixel[k][l].r) / 4;
 
-    			img2->pixel[i][j].g = (img1->pixel[k - 1][l - 1].g + img1->pixel[k - 1][l].g + img1->pixel[k][l - 1].g + img1->pixel[k][l].g) / 4;;
+    			img2->pixel[i][j].g = (img1->pixel[k - 1][l - 1].g + img1->pixel[k - 1][l].g + img1->pixel[k][l - 1].g + img1->pixel[k][l].g) / 4;
 
     			img2->pixel[i][j].b = (img1->pixel[k - 1][l - 1].b + img1->pixel[k - 1][l].b + img1->pixel[k][l - 1].b + img1->pixel[k][l].b) / 4;
-    			
+
     		}
     	}
 

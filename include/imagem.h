@@ -10,9 +10,6 @@
 //Função para ler a imagem e salvar os dados em uma struct.
 void LerImagem(const char *nome_arquivo, Imagem *img);
 
-//Função para testar se a leitura foi feita com sucesso, não será utilizada na versão final do projeto.
-void printaTeste(Imagem *img);
-
 //Função para alocar dinamicamente a matriz que irá receber os pixels.
 void AlocaMatriz(Imagem *img);
 
