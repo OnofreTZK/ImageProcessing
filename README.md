@@ -63,7 +63,10 @@ $ make clean
 Binários excluidos com sucesso!
 ```
 ##### Para executar:
-`./proj` `imagem.ppm`
+```bash
+./proj imagem.ppm
+```
+sendo `./proj` o nome do executável e `imagem.ppm` obrigatoriamente uma imagem do tipo `.ppm`, caso não tenha, esse repositório conta com duas: `got.ppm` e `ts.ppm`
 
 
       
