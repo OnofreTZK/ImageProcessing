@@ -37,9 +37,9 @@
     * Implementação de compressão de imagem, transformada de Hough e detecção de objetos
     * Recursividades mais complexas
     * Interface gráfica
-    * Verificar se a imagem foi nula
+    * Verificar se a imagem gerada foi nula
 
-### Compilação
+### Compilação e execução
 ##### Para baixar o código na sua maquina:
 ```bash
 $ git clone https://github.com/OnofreTZK/ITP_photoshop.git
