@@ -17,7 +17,7 @@ void Segmentation(Imagem *img);
 int Limiar(Imagem *img, int linha, int coluna);
 
 //Função para 'afiar' a imagem(sharpen).
-Imagem *Sharpening(Imagem *img, Imagem *img2, int count);
+Imagem *Sharpening(Imagem *img, Imagem *img2);
 
 //Função para borrar a imagem(Blur Box).
 Imagem *Blur(Imagem *img, Imagem *img2, int count);
@@ -26,10 +26,10 @@ Imagem *Blur(Imagem *img, Imagem *img2, int count);
 Imagem *Bordas(Imagem *img, Imagem *img2);
 
 //Função para aplicar o borrão de Gauss.
-Imagem *Gauss(Imagem *img, Imagem *img2);
+Imagem *Gauss(Imagem *img, Imagem *img2, int count);
 
 //Função para aplicar detecção de bordas com o operador de sobel.
-Imagem *Sobel(Imagem *img, Imagem *img2, int count);
+Imagem *Sobel(Imagem *img, Imagem *img2);
 
 //Função para rotacionar a imagem 90° para a esquerda.
 Imagem *GirarPraEsquerda(Imagem *img1, Imagem *img2);

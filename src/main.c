@@ -49,7 +49,8 @@ int main(int argc, char const *argv[]){
 		
 		char fname[FILENAME_MAX];//Nome do arquivo que sera processado na func getFilename(). 
 		
-		// A Liberação de memória é feita sempre que uma variável(Imagem) não for mais necessária
+		// A Liberação de memória é feita sempre que uma variável(Imagem) não for mais necessária.
+		// No caso de alguns filtros a liberação é feita na subrotina.
 
 		if(strcmp(cmd, cin) == 0){
 			LerImagem(argv[1], &entrada);
@@ -76,9 +77,8 @@ int main(int argc, char const *argv[]){
 		else if(strcmp(cmd, sbl) == 0){
 			LerImagem(argv[1], &entrada);
 			ImagemCinza(&entrada, 3);
-			Gauss(&entrada, &Output);
-			LiberaMemoria(&entrada);
-			Sobel(&Output, &Output2, 2);
+			Blur(&entrada, &Output, 3);
+			Sobel(&Output, &Output2);
 			LiberaMemoria(&Output);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
 			LiberaMemoria(&Output2);       
@@ -86,23 +86,19 @@ int main(int argc, char const *argv[]){
 		else if(strcmp(cmd, blu) == 0){
 			LerImagem(argv[1], &entrada);
 			Blur(&entrada, &Output, 3);
-			LiberaMemoria(&entrada);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output);
 			LiberaMemoria(&Output);
 		}
 		else if(strcmp(cmd, gss) == 0){
 			LerImagem(argv[1], &entrada);
-			Gauss(&entrada, &Output);
-			LiberaMemoria(&entrada);
+			Gauss(&entrada, &Output, 1);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output); 
 			LiberaMemoria(&Output);  
 		}
 		else if(strcmp(cmd, sha) == 0){
 			LerImagem(argv[1], &entrada);
-			Blur(&entrada, &Output, 3);
-			LiberaMemoria(&entrada);
-			Sharpening(&Output, &Output2, 3);
-			LiberaMemoria(&Output);
+			Blur(&entrada, &Output, 1);
+			Sharpening(&Output, &Output2);
 			CriarImagem(getFilename(fname, FILENAME_MAX), &Output2);
 			LiberaMemoria(&Output2); 
 		}

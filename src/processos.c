@@ -93,7 +93,7 @@
 
 
 
-    Imagem *Sharpening(Imagem *img, Imagem *img2, int count){
+    Imagem *Sharpening(Imagem *img, Imagem *img2){
     	int filter[3][3] = {{0, -1, 0},
     	{-1, 5, -1},
     	{0, -1, 0}};
@@ -143,9 +143,7 @@
     		}
     	}
 
-    	if(count > 1){
-    		img2 = Sharpening(img, img2, count - 1);
-    	}
+        LiberaMemoria(img);
 
     	return img2;
     }
@@ -207,13 +205,16 @@
     		}
     	}
 
+        LiberaMemoria(img); // Liberando sempre a imagem 1
+        
+        //Recursão simples para otimizar a borragem.
     	if(count > 1){
-    		img = Blur(img, img2, count -1);
+    		img2 = Blur(img2, img, count - 1);
     	}
 
 
 
-    	return img;
+    	return img2;
 
 
     }
@@ -287,7 +288,7 @@
 
 
 
-    Imagem *Gauss(Imagem *img, Imagem *img2){
+    Imagem *Gauss(Imagem *img, Imagem *img2, int count){
     	float filter[5][5] = {{1, 4, 6, 4, 1},
     	{4, 16, 24, 16, 4},
     	{6, 24, 36, 14, 6},
@@ -344,18 +345,22 @@
     		}
     	}
 
+        LiberaMemoria(img);
+
+        //Recursão simples para otimizar o borrão
+        if(count > 1){
+            img2 = Gauss(img2, img, count - 1);
+        }
 
 
-
-
-    	return img2;
+        return img2;
 
     }
 
 
 
 
-    Imagem *Sobel(Imagem *img, Imagem *img2, int count){
+    Imagem *Sobel(Imagem *img, Imagem *img2){
     	float Sobel_X[3][3] = {{ -1, 0, 1},
     	{-2, 0, 2},
     	{ -1, 0, 1}};
@@ -404,10 +409,6 @@
     				img2->pixel[i][j].b = (sqrt((aux_X*aux_X) + (aux_Y*aux_Y)));    
     			}           
     		}
-    	}
-
-    	if(count > 1){
-    		img2 = Sobel(img, img2, count - 1);
     	}
 
 
