@@ -165,6 +165,7 @@ int main(int argc, char const *argv[]){
 			LiberaMemoria(&Output9);
 		}
 		else if(strcmp(cmd, exi) == 0){
+			system("clear");
 			printf("~~~~~~~~~~~~~~~~~~~~~~~\n");
 			printf("\nPrograma Encerrado\n\n");
 			printf("~~~~~~~~~~~~~~~~~~~~~~~\n");
