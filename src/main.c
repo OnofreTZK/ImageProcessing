@@ -27,6 +27,7 @@ int main(int argc, char const *argv[]){
 
 
 	do{
+		system("clear");
 		printf("\n");
 		printf("qual operação deseja fazer na imagem?\n");
 		printf("$'cin'\t->\tConverte para escala cinza\n");
