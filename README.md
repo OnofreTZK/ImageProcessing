@@ -68,7 +68,7 @@ $ ./proj imagem.ppm
 ```
 sendo `./proj` o nome do executável e `imagem.ppm` obrigatoriamente uma imagem do tipo `.ppm`, caso não tenha, esse repositório conta com duas: `got.ppm` e `ts.ppm`
 
-### Referências que auxiliram no desenvolvimento
+### Referências que auxiliaram no desenvolvimento
 * [Artigo no Wikipedia - Kernel](https://en.wikipedia.org/wiki/Kernel_(image_processing))
 * [Artigo no Wikipedia - Operador de Sobel](https://en.wikipedia.org/wiki/Sobel_operator)
 * [Computerphile - Filters](https://www.youtube.com/watch?v=C_zFhWdM4ic)
