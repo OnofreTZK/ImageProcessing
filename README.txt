@@ -7,12 +7,13 @@ NOTA: Do lado de cada funcionalidade está o nome de quem implementou.
 * Todas as funcionalidades básicas foram atendidas:
 - Ler e criar imagens (Tiago)
 - Menu de comandos (Tiago e Vitoria)
-- Escala de cinza (Tiago) 
+- Escala de cinza com recursão (Tiago) 
 - Arquivos diferentes para cada processo (Tiago) 
 - Rotacionar (Vitoria) 
 - Ampliar (Vitoria)
 - Reduzir (Vitoria)
 - Filtros (Tiago)
+    * Os filtros de Blurring e Gauss possuem recursão
 - Detecção de bordas (Tiago)
 - Makefile (Tiago)
 - Documentação (Tiago e Vitoria)
